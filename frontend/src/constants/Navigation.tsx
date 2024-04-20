@@ -1,5 +1,4 @@
-// import Weather from "../pages/InfoPage";
-import Counter from "../pages/Counter";
+import DuchyInfo from "../pages/InfoPage";
 import HomePage from "../pages/Home";
 import Insert from "../pages/Insert";
 import LoginForm from "../pages/Login";
@@ -28,17 +27,12 @@ export const PATHS: {
         label: "Home",
         element: <HomePage />,
     },
-    // {
-    //     link: "/weather",
-    //     label: "Weather",
-    //     element: <Weather />,
-    // },
     {
-        link: "/counter",
-        label: "Counter",
-        element: <Counter />,
+        link: "/info",
+        label: "Info",
+        element: <DuchyInfo //Add backend GET for city info
+        name="Ithaca" description="Corn Hell."/>,
     },
-
     {
         link: "/insert",
         label: "Insert",

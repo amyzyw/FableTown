@@ -1,39 +1,41 @@
-// import { useEffect, useState } from "react";
-// import { CityInfo } from "@full-stack/types";
-// import { BACKEND_BASE_PATH } from "../constants/Navigation";
+import { useEffect, useState } from "react";
+//import { DuchyInfo } from "@full-stack/types";
+import { BACKEND_BASE_PATH } from "../constants/Navigation";
 
-// // get city info from our backend
-// const getCityInfo = (): Promise<CityInfo> =>
-//     fetch(`${BACKEND_BASE_PATH}/city-info`).then((res) => res.json());
 
-// // display city info page
-// const CityInfoPage = () => {
-//     // useState to preserve player's city information
-//     const [cityInfo, setCityInfo] = useState<CityInfo | null>(null);
+type Props<T> = {
+    name?: string;
+    description?: string
+    x?: number
+    y?: number
+};
 
-//     // useEffect to load the city info
-//     useEffect(() => {
-//         // Log the city info is being loaded
-//         console.log("Loading Your City's Information...");
+// get duchy info from our backend -> this should also go to navigation.tsx
+// const getDuchyInfo = () =>
+//     fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
 
-//         // get city info from our backend
-//         getCityInfo().then((data) => setCityInfo(data));
-//     }, []);
+// display duchy info page
+const DuchyInfo= <T extends { name: string, description: string}>({name, description, x, y}: Props<T>) => {
+    // useEffect to load the duchy info 
+    useEffect(() => {
 
-//     // If city info has not shown & is still loading, display a loading message
-//     if (!cityInfo) {
-//         return <p>Still Loading Your City's Information...</p>;
-//     }
+    // Where the edit and delete codes should go
+        // const editInfo () => {}
+        // UPDATE
 
-//     // Once player's city info is loaded, display it
-//     return (
-//         <div>
-//             <h1>{cityInfo.name}</h1>
-//             <p>{cityInfo.description}</p>
-//             <button>Edit</button>
-//             <button>Delete</button>
-//         </div>
-//     );
-// };
+        // const deleteInfo() => {}
+        // DELETE
+    
+    }, []);
 
-// export default CityInfoPage;
+    return (
+        <div>
+            <h1>{name}</h1>
+            <p>{description}</p>
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+    );
+};
+
+export default DuchyInfo;

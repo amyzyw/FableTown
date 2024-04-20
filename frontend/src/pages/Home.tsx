@@ -4,7 +4,7 @@ import MapSvg from './Map';
 
 
 const HomePage = () => {
-    
+    // function to draw marks on the svg
 
     return (
         <div style={{ height: '100vh', width: '100vw' }}>
