@@ -1,6 +1,7 @@
 import Weather from "../pages/InfoPage";
 import Counter from "../pages/Counter";
 import HomePage from "../pages/Home";
+import NameForm from "../pages/Insert";
 
 /**
  * TODO: Modify this constant to point to the URL of your backend.
@@ -35,5 +36,11 @@ export const PATHS: {
         link: "/counter",
         label: "Counter",
         element: <Counter />,
+    },
+
+    {
+        link: "/insert",
+        label: "Insert",
+        element: <NameForm />,
     },
 ];
