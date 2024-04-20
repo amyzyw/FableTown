@@ -9,17 +9,17 @@ interface DuchyInfo {
  
 // get duchy info from our backend
 const getDuchyInfo = (): Promise<DuchyInfo> =>
-    fetch(`${BACKEND_BASE_PATH}/city-info`).then((res) => res.json());
+    fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
 
 // display duchy info page
 const DuchyInfoPage = () => {
-    // useState to preserve player's city information
+    // useState to preserve player's duchy information
     const [duchyInfo, setDuchyInfo] = useState<DuchyInfo | null>(null);
 
     // useEffect to load the duchy info
     useEffect(() => {
-        // Log the city info is being loaded
-        console.log("Loading Your City's Information...");
+        // Log the duchy info is being loaded
+        console.log("Loading Your Duchy's Information...");
 
         // get duchy info from our backend
         getDuchyInfo().then((data) => setDuchyInfo(data));
@@ -27,7 +27,7 @@ const DuchyInfoPage = () => {
 
     // If duchy info has not shown & is still loading, display a loading message
     if (!duchyInfo) {
-        return <p>Still Loading Your City's Information...</p>;
+        return <p>Still Loading Your Duchy's Information...</p>;
     }
 
     // Once a player's duchy info is loaded, display it
