@@ -5,8 +5,8 @@ import { BACKEND_BASE_PATH } from "../constants/Navigation";
 interface DuchyInfo {
     name: string;
     description: string;
-  }
-
+}
+ 
 // get duchy info from our backend
 const getDuchyInfo = (): Promise<DuchyInfo> =>
     fetch(`${BACKEND_BASE_PATH}/city-info`).then((res) => res.json());
