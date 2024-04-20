@@ -2,43 +2,40 @@ import { useEffect, useState } from "react";
 //import { DuchyInfo } from "@full-stack/types";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
 
-interface DuchyInfo {
-    name: string;
-    description: string;
-}
- 
-// get duchy info from our backend
-const getDuchyInfo = (): Promise<DuchyInfo> =>
-    fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
+
+type Props<T> = {
+    name?: string;
+    description?: string
+    x?: number
+    y?: number
+};
+
+// get duchy info from our backend -> this should also go to navigation.tsx
+// const getDuchyInfo = () =>
+//     fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
 
 // display duchy info page
-const DuchyInfoPage = () => {
-    // useState to preserve player's duchy information
-    const [duchyInfo, setDuchyInfo] = useState<DuchyInfo | null>(null);
-
-    // useEffect to load the duchy info
+const DuchyInfo= <T extends { name: string, description: string}>({name, description, x, y}: Props<T>) => {
+    // useEffect to load the duchy info 
     useEffect(() => {
-        // Log the duchy info is being loaded
-        console.log("Loading Your Duchy's Information...");
 
-        // get duchy info from our backend
-        getDuchyInfo().then((data) => setDuchyInfo(data));
+    // Where the edit and delete codes should go
+        // const editInfo () => {}
+        // UPDATE
+
+        // const deleteInfo() => {}
+        // DELETE
+    
     }, []);
 
-    // If duchy info has not shown & is still loading, display a loading message
-    if (!duchyInfo) {
-        return <p>Still Loading Your Duchy's Information...</p>;
-    }
-
-    // Once a player's duchy info is loaded, display it
     return (
         <div>
-            <h1>{duchyInfo.name}</h1>
-            <p>{duchyInfo.description}</p>
+            <h1>{name}</h1>
+            <p>{description}</p>
             <button>Edit</button>
             <button>Delete</button>
         </div>
     );
 };
 
-export default DuchyInfoPage;
+export default DuchyInfo;

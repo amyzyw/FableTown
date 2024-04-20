@@ -1,11 +1,10 @@
-import countriesData from '../data/countries.geo.json';
 import * as d3 from 'd3';
 import React, { useEffect, useRef } from 'react';
 import MapSvg from './Map';
 
 
 const HomePage = () => {
-    
+    // function to draw marks on the svg
 
     return (
         <div style={{ height: '100vh', width: '100vw' }}>
