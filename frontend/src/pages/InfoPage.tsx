@@ -1,39 +1,44 @@
 import { useEffect, useState } from "react";
-import { CityInfo } from "@full-stack/types";
+//import { DuchyInfo } from "@full-stack/types";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
 
-// get city info from our backend
-const getCityInfo = (): Promise<CityInfo> =>
+interface DuchyInfo {
+    name: string;
+    description: string;
+  }
+
+// get duchy info from our backend
+const getDuchyInfo = (): Promise<DuchyInfo> =>
     fetch(`${BACKEND_BASE_PATH}/city-info`).then((res) => res.json());
 
-// display city info page
-const CityInfoPage = () => {
+// display duchy info page
+const DuchyInfoPage = () => {
     // useState to preserve player's city information
-    const [cityInfo, setCityInfo] = useState<CityInfo | null>(null);
+    const [duchyInfo, setDuchyInfo] = useState<DuchyInfo | null>(null);
 
-    // useEffect to load the city info
+    // useEffect to load the duchy info
     useEffect(() => {
         // Log the city info is being loaded
         console.log("Loading Your City's Information...");
 
-        // get city info from our backend
-        getCityInfo().then((data) => setCityInfo(data));
+        // get duchy info from our backend
+        getDuchyInfo().then((data) => setDuchyInfo(data));
     }, []);
 
-    // If city info has not shown & is still loading, display a loading message
-    if (!cityInfo) {
+    // If duchy info has not shown & is still loading, display a loading message
+    if (!duchyInfo) {
         return <p>Still Loading Your City's Information...</p>;
     }
 
-    // Once player's city info is loaded, display it
+    // Once a player's duchy info is loaded, display it
     return (
         <div>
-            <h1>{cityInfo.name}</h1>
-            <p>{cityInfo.description}</p>
+            <h1>{duchyInfo.name}</h1>
+            <p>{duchyInfo.description}</p>
             <button>Edit</button>
             <button>Delete</button>
         </div>
     );
 };
 
-export default CityInfoPage;
+export default DuchyInfoPage;
