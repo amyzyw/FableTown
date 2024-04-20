@@ -1,4 +1,4 @@
-import Weather from "../pages/Weather";
+import Weather from "../pages/InfoPage";
 import Counter from "../pages/Counter";
 import HomePage from "../pages/Home";
 
