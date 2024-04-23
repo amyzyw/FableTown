@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-//import { DuchyInfo } from "@full-stack/types";
+import { City } from "@full-stack/types";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
 
 
