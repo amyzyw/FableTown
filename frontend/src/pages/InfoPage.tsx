@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-//import { DuchyInfo } from "@full-stack/types";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
-
+import express, { Express } from "express";
+//import cors from "cors";
+//import { DuchyInfo } from "@full-stack/types";
 
 type Props<T> = {
     name?: string;
@@ -16,36 +17,44 @@ type Props<T> = {
 
 // display duchy info page
 const DuchyInfo= <T extends { name: string, description: string, x: number
-    y: number}>({
-        name, 
-        description, 
-        x, 
-        y}: Props<T>) => {
+    y: number}>({name, description, x, y}: Props<T>) => {
 
     const [editName, setEditName] = useState(name || '');
     const [editDescription, setEditDescription] = useState(description || '');
 
     // useEffect to load the duchy info 
     useEffect(() => {
-       //get
+        const getDuchyInfo = async () => {
+            try {
+                const res = await app.get('${BACKEND_BASE_PATH}/duchy-info');
+                const data = res.data;
+                setEditName(data.name);
+                setEditDescription(data.description);
+            } catch (error) {
+                console.error("ERROR: Cannot Get Your Duchy Information:", error);
+            }
+        };
+        getDuchyInfo();
+        //app.get
+        //get
         // async await try catch error handling
         // should I code the backend
        // try catch error??
        // await fetch duchy from backend
        // await response.json 
-       //fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
     }, []);
 
     // Where the edit and delete codes should go
     // const editInfo () => {
     //     console.log("Editing Your Duchy's Info:", editName, editDescription);
     //     // code an API to the backend
-    //     //put
+    //     //app.put("/duchy-info", (req: Request, res: Response) => {
+              
     // };
 
     // const deleteInfo() => {
     //     console.log("Deleting Your Duchy:", name);
-    //     //delete
+    //     //app.delete
     // };
 
     // const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
