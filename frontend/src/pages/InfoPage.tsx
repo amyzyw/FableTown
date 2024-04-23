@@ -37,29 +37,28 @@ const DuchyInfo= <T extends { name: string, description: string, x: number
     }, []);
 
     // Where the edit and delete codes should go
-    const editInfo () => {
-        console.log("Editing Your Duchy's Info:", editName, editDescription);
-        // code an API to the backend
-        app.put("/api/")
-        //put
-    };
+    // const editInfo () => {
+    //     console.log("Editing Your Duchy's Info:", editName, editDescription);
+    //     // code an API to the backend
+    //     //put
+    // };
 
-    const deleteInfo() => {
-        console.log("Deleting Your Duchy:", name);
-        //delete
-    };
+    // const deleteInfo() => {
+    //     console.log("Deleting Your Duchy:", name);
+    //     //delete
+    // };
 
-    const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        //update the state with setSearch (function provided by React's useState)
-        setEditName(event.target.value);
-        setEditDescription(event.target.value);  
-    };
+    // const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     //update the state with setSearch (function provided by React's useState)
+    //     setEditName(event.target.value);
+    //     setEditDescription(event.target.value);  
+    // };
 
     return (
         <div>
             <h1>{name}</h1>
             <p>{description}</p>
-            <input type='text' value={editName} 
+            {/* {<input type='text' value={editName} 
                 onChange={controlInputChange}
                 placeholder='New Name'
             />
@@ -71,7 +70,7 @@ const DuchyInfo= <T extends { name: string, description: string, x: number
             <button onClick={editInfo}>Edit</button>
 
             <button>Delete</button>
-            <button onClick={deleteInfo}>Delete</button>
+            <button onClick={deleteInfo}>Delete</button>} */}
 
         </div>
     );
