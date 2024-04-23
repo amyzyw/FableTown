@@ -7,29 +7,61 @@ type Props<T> = {
   y?: number
 };
 
-const Insert = <T extends { name: string, description: string, x: number, y: number}>({name, description, x, y}: Props<T>) => {
-  if(useState("submit")) {
-    const addInfo = () => {}
-    // use memo
-    // POST
-  }
+const Insert = () => {
+
+    // Define state variables for form inputs
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [x, setX] = useState('');
+    const [y, setY] = useState('');
+
+  // Handle form submission
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('Submitted:', { name, description, x, y });
+    // Add your logic to submit the form data to a backend or perform other actions
+  };
+
+  // Handle input changes for name field
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+  // Handle input changes for description field
+  const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDescription(event.target.value);
+  };
+  // Handle input changes for x field
+    const handleXChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setX(event.target.value);
+    };
+  // Handle input changes for y field
+    const handleYChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setY(event.target.value);
+    };
+  
   
   return (
-            <form>
+            <form onSubmit={handleSubmit}>
               <label>
                 Name of the place:
-                <input type="text" value={name} />
+                <input type="text" value={name}
+                onChange={handleNameChange}
+                required/>
               </label>
               <label>
                 Description:
-                <input type="text" value={description} />
+                <input type="textarea" value={description} 
+                  onChange={handleDescriptionChange}
+                />
               </label>
               <label>
                 Location of the place:
                 X:
-                <input type="number" value={x} />
+                <input type="number" value={x} 
+                onChange={handleXChange}/>
                 Y:
-                <input type="number" value={y} />
+                <input type="number" value={y}
+                onChange={handleYChange}/>
               </label>
               <input type="submit" value="Submit" />
             </form>

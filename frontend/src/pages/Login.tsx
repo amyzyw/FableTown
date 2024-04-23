@@ -2,47 +2,47 @@ import React, { useState } from 'react';
 
 const LoginForm = () => {
   // Define state variables for form inputs
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
   // Handle form submission
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Submitted:', { name, email });
+    console.log('Submitted:', { username, password });
     // Add your logic to submit the form data to a backend or perform other actions
   };
 
   // Handle input changes for name field
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value);
   };
 
   // Handle input changes for email field
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleLogin}>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
-          id="name"
-          value={name}
-          onChange={handleNameChange}
-          placeholder="Enter your name"
+          id="username"
+          value={username}
+          onChange={handleUserNameChange}
+          placeholder="Enter your username"
           required
         />
       </div>
       <div>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="password">Password:</label>
         <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="Enter your email"
+          type="text"
+          id="password"
+          value={password}
+          onChange={handlePasswordChange}
+          placeholder="Enter your password"
           required
         />
       </div>
