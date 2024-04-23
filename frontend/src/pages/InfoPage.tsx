@@ -27,7 +27,11 @@ const DuchyInfo = <T extends { name: string, description: string }>({
 
     // useEffect to load the duchy info 
     useEffect(() => {
-       // fetch the dutchy info from the backend
+       // async await try catch error handling
+        // should I code the backend
+       // try catch error??
+       // await fetch duchy from backend
+       // await response.json 
        //fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
     }, []);
 
