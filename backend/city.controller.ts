@@ -1,6 +1,6 @@
 import { db } from "./firebase";
 import { City, CityWithId } from "@full-stack/types";
-const cityCollectionRef = db.collection("citys");
+const cityCollectionRef = db.collection("CityData");
 
 export const getACity = async (cityId: string) => {
   return await cityCollectionRef.doc(cityId).get();
