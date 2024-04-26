@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { City, CityWithId } from "../lib/types/index.ts";
+import { City, CityWithId } from "@full-stack/types";
 import { cityRouter } from "./city.routes";
 
 const cityCollectionRef = db.collection("citys");

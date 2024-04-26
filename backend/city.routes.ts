@@ -7,7 +7,7 @@ import {
   updateInfo,
 } from "./city.controller";
 
-import { City } from "../lib/types/index.ts";
+import { City } from "@full-stack/types";
 
 const cityRouter: Router = express.Router();
 

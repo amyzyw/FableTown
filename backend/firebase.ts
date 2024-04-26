@@ -5,7 +5,7 @@ import serviceAccount  from './service_account.json';
 // var serviceAccount = require("./serviceaccount.json");
 
 const app = initializeApp({
-  credential: cert(serviceAccount),
+  credential: cert(serviceAccount as any),
 });
 const db = getFirestore();
 
