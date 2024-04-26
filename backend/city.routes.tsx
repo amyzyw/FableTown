@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 
 import {
-//   getCity,
+  getAllCity,
   addCity,
   deleteCity,
   updateInfo,
@@ -26,6 +26,18 @@ const cityRouter: Router = express.Router();
 //     });
 //   }
 // });
+
+cityRouter.get('/cities', async (req, res) => {
+  try {
+    const cities = await getAllCity();
+    // res.send(drawCitiesSVG(cities));
+    res.status(200).send({
+      message: `SUCCESS retrieved all city data to the map in FableTown`
+    });
+  } catch (error) {
+    res.status(500).send('Error retrieving cities');
+  }
+});
 
 cityRouter.post("/addCity", async (req, res) => {
   try {

@@ -1,4 +1,3 @@
-import path from "path";
 import express, { Express } from "express";
 import cors from "cors";
 import { City } from "@full-stack/types";
@@ -11,7 +10,6 @@ const port = 8080;
 
 app.use(cors());
 app.use(express.json());
-
 
 app.get("/", async (req, res) => {
     console.log("GET city was called");
