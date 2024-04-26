@@ -16,8 +16,11 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
     }
   }, [cities]);
 
+  console.log("here we have",cities)
+
   const drawCities = () => {
     const svg = d3.select('#fantasyMap');
+    console.log("Drawing")
 
     svg.selectAll("circle")
         .data(cities)
@@ -25,7 +28,8 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
         .append("circle")
         .attr("cx", city => city.x) // Assume city data includes 'x' coordinate
         .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
-        .attr("fill", "blue"); // Fill color for the circles
+        .attr("r", 100)
+        .attr("fill", "red"); // Fill color for the circles
   };
 
   return(

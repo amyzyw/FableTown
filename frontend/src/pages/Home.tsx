@@ -12,20 +12,20 @@ const HomePage = () => {
         fetch(BACKEND_BASE_PATH).then((res) => {
             return res.json();
         }).then((data) => {
-            console.log("DEBUGGER:", data);
+            // console.log("DEBUGGER:", data);
             setCities(data);
         }).catch(() => {
             alert("Something went wrong!");
         });
     }, []);
 
-    useEffect(() => {
-        fetch(`${BACKEND_BASE_PATH}cities/`).then((res) => res.json()).then((data) => {
-            console.log("RECEIVED CITIES: ", data);
-        }).catch(() => {
-            alert("Uh oh!")
-        })
-    }, []);
+    // useEffect(() => {
+    //     fetch(`${BACKEND_BASE_PATH}cities/`).then((res) => res.json()).then((data) => {
+    //         console.log("RECEIVED CITIES: ", data);
+    //     }).catch(() => {
+    //         alert("Uh oh!")
+    //     })
+    // }, []);
 
     return (
         <div style={{ height: '100vh', width: '100vw' }}>
