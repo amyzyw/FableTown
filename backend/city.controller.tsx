@@ -4,15 +4,15 @@ import { cityRouter } from "./city.routes";
 
 const cityCollectionRef = db.collection("citys");
 
-// export const getCity = async (name: string) => {
-//   const snapshot = await cityCollectionRef.where("owner", "==", email).get();
-//   let tasks: TaskWithId[] = [];
-//   snapshot.forEach((doc) => {
-//     const task = { id: doc.id, ...(doc.data() as Task) };
-//     tasks.push(task);
-//   });
-//   return tasks;
-// };
+export const getAllCity = async () => {
+  const snapshot = await cityCollectionRef.get();
+  let cities: any[] = [];
+  snapshot.forEach(doc => {
+    const city = { id: doc.id, ...doc.data() };
+    cities.push(city);
+  });
+  return cities;
+};
 
 export const addCity = async (city: City) => {
   const newDoc = cityCollectionRef.doc();
