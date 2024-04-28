@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-//import { DuchyInfo } from "@full-stack/types";
+import express, { Express, Request, Response } from "express";
+import cors from "cors";
+//import App from "../App";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
-import express, { Express } from "express";
-//import cors from "cors";
-//import { CityInfo } from "@full-stack/types";
 
 type Props<T> = {
     name?: string;
@@ -12,9 +11,25 @@ type Props<T> = {
     y?: number
 };
 
-// get city info from our backend -> this should also go to navigation.tsx
-// const getCityInfo = () =>
-//     fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
+const app: Express = express();
+const port = 8080;
+
+app.use(cors());
+app.use(express.json());
+
+app.put("${BACKEND_BASE_PATH}/city-info/:id", (req: Request, res: Response) => {
+    const { name, description } = req.body;
+    console.log("Editing Your City's Information:", name, description);
+    res.status(200).send({ message: "City Information is Updated!" });
+    //res.status(404).json({ error: "Oh No! Failure to Update City's Info" });
+});
+
+app.delete("${BACKEND_BASE_PATH}/city-info/:id", (req: Request, res: Response) => {
+    const cityDelete = req.params.name;
+    console.log("Deleting Your City:", cityDelete);
+    res.status(200).send({ message: "City Deleted Successfully" });
+    //res.status(404).json({ error: "Oh No! Failure to Delete City" });
+});
 
 // display city info page
 const CityInfo= <T extends { name: string, description: string, x: number
@@ -23,46 +38,52 @@ const CityInfo= <T extends { name: string, description: string, x: number
     const [editName, setEditName] = useState(name || '');
     const [editDescription, setEditDescription] = useState(description || '');
 
-    // useEffect to load the duchy info 
-    useEffect(() => {
-        //const getDuchyInfo = async (req, res) => {
-        const getCityInfo = async () => {
-            try {
-                const res = await app.get('${BACKEND_BASE_PATH}/duchy-info');
-                const data = res.data;
-                setEditName(data.name);
-                setEditDescription(data.description);
-            } catch (error) {
-                console.error("ERROR: Cannot Get Your Duchy Information:", error);
-            }
-        };
-        getCityInfo();
-    }, []);
-
     // Where the edit and delete codes should go
-    // const editInfo () => {
-    //     console.log("Editing Your City's Info:", editName, editDescription);
-    //     // code an API to the backend
-    //     //app.put("/duchy-info", (req: Request, res: Response) => {
+    const editInfo = () => {
+        console.log("Editing Your City's Info:", editName, editDescription);
+        fetch("${BACKEND_BASE_PATH}/city-info/${cityId}", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: editName, description: editDescription }),
+        }).then(res => {
+            if (res.ok) {
+                console.log("City Information has been Updated!");
+            } else {
+                console.log("Failure to Update City's Information");
+            }
+        }).catch(error => {
+            console.error("Uh Oh! Error Found While Updating City:", error);
+        });
               
-    // };
+    };
 
-    // const deleteInfo() => {
-    //     console.log("Deleting Your City:", name);
-    //     //app.delete
-    // };
+    const deleteInfo = () => {
+        console.log("Deleting Your City:", name);
+        fetch("${BACKEND_BASE_PATH}/city-info/${cityId}", {
+            method: "DELETE",
+        }).then(res => {
+            if (res.ok) {
+                console.log("Your City is Deleted");
+            } else {
+                console.log("Problem! Failed to Delete Your City");
+            }
+        }).catch(error => {
+            console.error("Uh Oh! Error Found While Deleting City:", error);
+        });
+              
+    };
 
-    // const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     //update the state with setSearch (function provided by React's useState)
-    //     setEditName(event.target.value);
-    //     setEditDescription(event.target.value);  
-    // };
+    const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        //update the state with setSearch (function provided by React's useState)
+        setEditName(event.target.value);
+        setEditDescription(event.target.value);
+    };
 
     return (
         <div>
             <h1>{name}</h1>
             <p>{description}</p>
-            {/* {<input type='text' value={editName} 
+            <input type='text' value={editName} 
                 onChange={controlInputChange}
                 placeholder='New Name'
             />
@@ -70,12 +91,8 @@ const CityInfo= <T extends { name: string, description: string, x: number
                 onChange={controlInputChange}
                 placeholder='New Description'
             />
-            <button>Edit</button>
             <button onClick={editInfo}>Edit</button>
-
-            <button>Delete</button>
-            <button onClick={deleteInfo}>Delete</button>} */}
-
+            <button onClick={deleteInfo}>Delete</button>
         </div>
     );
 };

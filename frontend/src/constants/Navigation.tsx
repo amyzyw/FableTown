@@ -1,4 +1,4 @@
-import DuchyInfo from "../pages/InfoPage";
+import CityInfo from "../pages/InfoPage";
 import HomePage from "../pages/Home";
 import Insert from "../pages/Insert";
 import LoginForm from "../pages/Login";
@@ -30,7 +30,7 @@ export const PATHS: {
     {
         link: "/info",
         label: "Info",
-        element: <DuchyInfo //Add backend GET for city info？
+        element: <CityInfo //Add backend GET for city info？
         name="Ithaca" description="Corn Hell."/>,
     },
     {
