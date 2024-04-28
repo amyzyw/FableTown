@@ -6,7 +6,7 @@ import { BACKEND_BASE_PATH } from "../constants/Navigation";
 
 type Props<T> = {
     name?: string;
-    description?: string
+    description?: strinUg
     x?: number
     y?: number
 };
@@ -17,14 +17,14 @@ const port = 8080;
 app.use(cors());
 app.use(express.json());
 
-app.put("${BACKEND_BASE_PATH}/city-info/:id", (req: Request, res: Response) => {
+app.put('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
     const { name, description } = req.body;
     console.log("Editing Your City's Information:", name, description);
     res.status(200).send({ message: "City Information is Updated!" });
     //res.status(404).json({ error: "Oh No! Failure to Update City's Info" });
 });
 
-app.delete("${BACKEND_BASE_PATH}/city-info/:id", (req: Request, res: Response) => {
+app.delete('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
     const cityDelete = req.params.name;
     console.log("Deleting Your City:", cityDelete);
     res.status(200).send({ message: "City Deleted Successfully" });
@@ -41,7 +41,7 @@ const CityInfo= <T extends { name: string, description: string, x: number
     // Where the edit and delete codes should go
     const editInfo = () => {
         console.log("Editing Your City's Info:", editName, editDescription);
-        fetch("${BACKEND_BASE_PATH}/city-info/${cityId}", {
+        fetch('${BACKEND_BASE_PATH}/city-info/${cityId}', {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: editName, description: editDescription }),
@@ -59,7 +59,7 @@ const CityInfo= <T extends { name: string, description: string, x: number
 
     const deleteInfo = () => {
         console.log("Deleting Your City:", name);
-        fetch("${BACKEND_BASE_PATH}/city-info/${cityId}", {
+        fetch('${BACKEND_BASE_PATH}/city-info/${cityId}', {
             method: "DELETE",
         }).then(res => {
             if (res.ok) {

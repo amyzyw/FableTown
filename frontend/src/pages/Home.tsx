@@ -14,6 +14,9 @@ const HomePage = () => {
         }).then((data) => {
             // console.log("DEBUGGER:", data);
             setCities(data);
+            //is it possible to add these two below in useEffect?
+            //setEditName(data.name);
+            //setEditDescription(data.description);
         }).catch(() => {
             alert("Something went wrong!");
         });
