@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
 import express, { Express } from "express";
 //import cors from "cors";
-//import { DuchyInfo } from "@full-stack/types";
+//import { CityInfo } from "@full-stack/types";
 
 type Props<T> = {
     name?: string;
@@ -11,12 +11,12 @@ type Props<T> = {
     y?: number
 };
 
-// get duchy info from our backend -> this should also go to navigation.tsx
-// const getDuchyInfo = () =>
+// get city info from our backend -> this should also go to navigation.tsx
+// const getCityInfo = () =>
 //     fetch(`${BACKEND_BASE_PATH}/duchy-info`).then((res) => res.json());
 
-// display duchy info page
-const DuchyInfo= <T extends { name: string, description: string, x: number
+// display city info page
+const CityInfo= <T extends { name: string, description: string, x: number
     y: number}>({name, description, x, y}: Props<T>) => {
 
     const [editName, setEditName] = useState(name || '');
@@ -24,7 +24,8 @@ const DuchyInfo= <T extends { name: string, description: string, x: number
 
     // useEffect to load the duchy info 
     useEffect(() => {
-        const getDuchyInfo = async () => {
+        //const getDuchyInfo = async (req, res) => {
+        const getCityInfo = async () => {
             try {
                 const res = await app.get('${BACKEND_BASE_PATH}/duchy-info');
                 const data = res.data;
@@ -34,26 +35,19 @@ const DuchyInfo= <T extends { name: string, description: string, x: number
                 console.error("ERROR: Cannot Get Your Duchy Information:", error);
             }
         };
-        getDuchyInfo();
-        //app.get
-        //get
-        // async await try catch error handling
-        // should I code the backend
-       // try catch error??
-       // await fetch duchy from backend
-       // await response.json 
+        getCityInfo();
     }, []);
 
     // Where the edit and delete codes should go
     // const editInfo () => {
-    //     console.log("Editing Your Duchy's Info:", editName, editDescription);
+    //     console.log("Editing Your City's Info:", editName, editDescription);
     //     // code an API to the backend
     //     //app.put("/duchy-info", (req: Request, res: Response) => {
               
     // };
 
     // const deleteInfo() => {
-    //     console.log("Deleting Your Duchy:", name);
+    //     console.log("Deleting Your City:", name);
     //     //app.delete
     // };
 
@@ -85,4 +79,4 @@ const DuchyInfo= <T extends { name: string, description: string, x: number
     );
 };
 
-export default DuchyInfo;
+export default CityInfo;
