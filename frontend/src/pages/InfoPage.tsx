@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+//import { DuchyInfo } from "@full-stack/types";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
 import express, { Express } from "express";
 //import cors from "cors";

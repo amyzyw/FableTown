@@ -15,7 +15,7 @@ import LoginForm from "../pages/Login";
  * If you've already deployed your app (using `fly launch` or `fly deploy`),
  * you can find the name by running `flyctl status`, under App > Name.
  */
-export const BACKEND_BASE_PATH = 'https://fa23-lec9-demo-soln.fly.dev/api';
+export const BACKEND_BASE_PATH = 'http://localhost:8080/';
 
 export const PATHS: {
     link: string;
@@ -30,7 +30,7 @@ export const PATHS: {
     {
         link: "/info",
         label: "Info",
-        element: <DuchyInfo //Add backend GET for city info
+        element: <DuchyInfo //Add backend GET for city info？
         name="Ithaca" description="Corn Hell."/>,
     },
     {

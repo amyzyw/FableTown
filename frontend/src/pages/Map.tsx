@@ -1,17 +1,45 @@
-import * as React from "react";
+import React, { useEffect } from 'react';
+import * as d3 from 'd3';
+import { City } from '../../../lib/types/index.ts';
 
 interface MapSvgProps extends React.SVGProps<SVGSVGElement> {
     // You can extend this interface to include other props specific to your component
+    cities: City[];
+    style: React.CSSProperties;
 }
 
-const MapSvg: React.FC<MapSvgProps> = (props) => (
+const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
+
+  useEffect(() => {
+    if (cities.length > 0) {
+        drawCities();
+    }
+  }, [cities]);
+
+  console.log("here we have",cities)
+
+  const drawCities = () => {
+    const svg = d3.select('#fantasyMap');
+    console.log("Drawing")
+
+    svg.selectAll("circle")
+        .data(cities)
+        .enter()
+        .append("circle")
+        .attr("cx", city => city.x) // Assume city data includes 'x' coordinate
+        .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
+        .attr("r", 100)
+        .attr("fill", "red"); // Fill color for the circles
+  };
+
+  return(
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     id="fantasyMap"
     width={1440}
     height={692}
-    {...props}
+    // {...props}
   >
     <defs>
       <g id="filters">
@@ -4203,5 +4231,6 @@ const MapSvg: React.FC<MapSvgProps> = (props) => (
       <rect width="100%" height="100%" />
     </g>
   </svg>
-)
+  )
+}
 export default MapSvg

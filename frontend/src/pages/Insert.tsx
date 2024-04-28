@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
-
-type Props<T> = {
-  name?: string;
-  description?: string
-  x?: number
-  y?: number
-};
+import React, { useEffect, useState } from 'react';
+import { BACKEND_BASE_PATH } from "../constants/Navigation";
+import { City } from "../../../lib/types/index";
 
 const Insert = () => {
 
@@ -19,7 +14,24 @@ const Insert = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('Submitted:', { name, description, x, y });
+    const submitted = { name, description, x, y }
     // Add your logic to submit the form data to a backend or perform other actions
+    fetch(`${BACKEND_BASE_PATH}addCity/`,{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({name: name,
+                            description: description,
+                            x: x,
+                            y:y
+      }),
+    },).then((res) => res.json()).then((data) => {
+        console.log("RECEIVED CITIES: ", data);
+        return data
+    }).catch(() => {
+        alert("Uh oh!")
+    })
   };
 
   // Handle input changes for name field
@@ -39,7 +51,26 @@ const Insert = () => {
       setY(event.target.value);
     };
   
-  
+  //   useEffect(() => {
+  //     console.log("here")
+  //     fetch(`${BACKEND_BASE_PATH}addCity/`,{
+  //       method: 'POST',
+  //       headers: {
+  //         'content-type': 'application/json',
+  //       },
+  //       body: JSON.stringify({name: name,
+  //                             description: description,
+  //                             x: x,
+  //                             y:y
+  //       }),
+  //     },).then((res) => res.json()).then((data) => {
+  //         console.log("RECEIVED CITIES: ", data);
+  //         return data.city
+  //     }).catch(() => {
+  //         alert("Uh oh!")
+  //     })
+  // }, []);
+
   return (
             <form onSubmit={handleSubmit}>
               <label>
@@ -68,54 +99,3 @@ const Insert = () => {
           );
 }
 export default Insert;
-
-// interface Props {
-//     initialValue?: string;
-//   }
-  
-//   interface State {
-//     value: string;
-//   }
-  
-
-// class NameForm extends React.Component<Props, State> {
-//     constructor(props: Props) {
-//       super(props);
-//       this.state = { value: '' };
-  
-//       this.handleChange = this.handleChange.bind(this);
-//       this.handleSubmit = this.handleSubmit.bind(this);
-//     }
-  
-//     handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-//       this.setState({value: event.target.value});
-//     }
-  
-//     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-//       alert('A name was submitted: ' + this.state.value);
-//       event.preventDefault();
-//     }
-  
-//     render() {
-//       return (
-//         <form onSubmit={this.handleSubmit}>
-//           <label>
-//             Name of the place:
-//             <input type="text" value={this.state.value} onChange={this.handleChange} />
-//           </label>
-//           <label>
-//             Location of the place:
-//             X:
-//             <input type="number" value={this.state.value} onChange={this.handleChange} />
-//             Y:
-//             <input type="number" value={this.state.value} onChange={this.handleChange} />
-//           </label>
-//           <label>
-//             Description:
-//             <input type="text" value={this.state.value} onChange={this.handleChange} />
-//           </label>
-//           <input type="submit" value="Submit" />
-//         </form>
-//       );
-//     }
-//   }
