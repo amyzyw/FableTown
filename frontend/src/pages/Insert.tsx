@@ -5,8 +5,8 @@ import { City } from "../../../lib/types/index";
 const Insert = () => {
 
     // Define state variables for form inputs
-    const [name, setName] = useState(0);
-    const [description, setDescription] = useState(0);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [x, setX] = useState<number>(0);
     const [y, setY] = useState<number>(0);
 
@@ -44,11 +44,11 @@ const Insert = () => {
   };
   // Handle input changes for x field
     const handleXChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setX(event.target.value);
+      setX(Number(event.target.value));
     };
   // Handle input changes for y field
     const handleYChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setY(event.target.value);
+      setY(Number(event.target.value));
     };
   
   //   useEffect(() => {
