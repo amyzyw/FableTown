@@ -5,16 +5,16 @@ import { City } from "../../../lib/types/index";
 const Insert = () => {
 
     // Define state variables for form inputs
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [x, setX] = useState('');
-    const [y, setY] = useState('');
+    const [name, setName] = useState(0);
+    const [description, setDescription] = useState(0);
+    const [x, setX] = useState<number>(0);
+    const [y, setY] = useState<number>(0);
 
   // Handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('Submitted:', { name, description, x, y });
-    const submitted = { name, description, x, y }
+    // const submitted = { name, description, x, y }
     // Add your logic to submit the form data to a backend or perform other actions
     fetch(`${BACKEND_BASE_PATH}addCity/`,{
       method: 'POST',

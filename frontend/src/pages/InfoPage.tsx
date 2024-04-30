@@ -1,50 +1,70 @@
 import { useEffect, useState } from "react";
-import express, { Express, Request, Response } from "express";
-import cors from "cors";
+// import express, { Express, Request, Response } from "express";
+// import cors from "cors";
 //import App from "../App";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
 
 type Props<T> = {
     name?: string;
-    description?: strinUg
+    description?: string
     x?: number
     y?: number
 };
 
-const app: Express = express();
-const port = 8080;
+// const app: Express = express();
+// const port = 8080;
 
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
+// app.use(express.json());
 
-app.put('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
-    const { name, description } = req.body;
-    console.log("Editing Your City's Information:", name, description);
-    res.status(200).send({ message: "City Information is Updated!" });
-    //res.status(404).json({ error: "Oh No! Failure to Update City's Info" });
-});
+// app.put('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
+//     const { name, description } = req.body;
+//     console.log("Editing Your City's Information:", name, description);
+//     res.status(200).send({ message: "City Information is Updated!" });
+//     //res.status(404).json({ error: "Oh No! Failure to Update City's Info" });
+// });
 
-app.delete('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
-    const cityDelete = req.params.name;
-    console.log("Deleting Your City:", cityDelete);
-    res.status(200).send({ message: "City Deleted Successfully" });
-    //res.status(404).json({ error: "Oh No! Failure to Delete City" });
-});
+// app.delete('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
+//     const cityDelete = req.params.name;
+//     console.log("Deleting Your City:", cityDelete);
+//     res.status(200).send({ message: "City Deleted Successfully" });
+//     //res.status(404).json({ error: "Oh No! Failure to Delete City" });
+// });
 
 // display city info page
 const CityInfo= <T extends { name: string, description: string, x: number
     y: number}>({name, description, x, y}: Props<T>) => {
 
+    const cityId = 0;
+
     const [editName, setEditName] = useState(name || '');
     const [editDescription, setEditDescription] = useState(description || '');
+    const [editX, setX] = useState(x || '');
+    const [editY, setY] = useState(y || '');
+    const [city, setCity] = useState([]);
 
+    useEffect(() => {
+        fetch("${BACKEND_BASE_PATH}/${cityId}").then((res) => {
+            return res.json();
+        }).then((data) => {
+            // console.log("DEBUGGER:", data);
+            setCity(data);
+            //is it possible to add these two below in useEffect?
+            //setEditName(data.name);
+            //setEditDescription(data.description);
+        }).catch(() => {
+            alert("Something went wrong!");
+        });
+    }, []);
+    
+    
     // Where the edit and delete codes should go
     const editInfo = () => {
-        console.log("Editing Your City's Info:", editName, editDescription);
-        fetch('${BACKEND_BASE_PATH}/city-info/${cityId}', {
+        // console.log("Editing Your City's Info:", editName, editDescription);
+        fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: editName, description: editDescription }),
+            body: JSON.stringify({ name: editName, description: editDescription, x: editX, y: editY}),
         }).then(res => {
             if (res.ok) {
                 console.log("City Information has been Updated!");
@@ -59,7 +79,7 @@ const CityInfo= <T extends { name: string, description: string, x: number
 
     const deleteInfo = () => {
         console.log("Deleting Your City:", name);
-        fetch('${BACKEND_BASE_PATH}/city-info/${cityId}', {
+        fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
             method: "DELETE",
         }).then(res => {
             if (res.ok) {
@@ -77,10 +97,12 @@ const CityInfo= <T extends { name: string, description: string, x: number
         //update the state with setSearch (function provided by React's useState)
         setEditName(event.target.value);
         setEditDescription(event.target.value);
+        setX(event.target.value);
+        setY(event.target.value);
     };
 
     return (
-        <div>
+        <form onSubmit={editInfo}>
             <h1>{name}</h1>
             <p>{description}</p>
             <input type='text' value={editName} 
@@ -91,9 +113,17 @@ const CityInfo= <T extends { name: string, description: string, x: number
                 onChange={controlInputChange}
                 placeholder='New Description'
             />
-            <button onClick={editInfo}>Edit</button>
+            <input value={editX} 
+                onChange={controlInputChange}
+                placeholder='New X'
+            />
+            <input value={editY} 
+                onChange={controlInputChange}
+                placeholder='New Y'
+            />
+            <button onClick={editInfo}>Save</button>
             <button onClick={deleteInfo}>Delete</button>
-        </div>
+        </form>
     );
 };
 
