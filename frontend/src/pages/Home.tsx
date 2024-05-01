@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { City, CityWithId } from "../../../lib/types/index.ts";
 import MapSvg from './Map';
 import { BACKEND_BASE_PATH } from '../constants/Navigation.tsx';
-import AuthUserProvider from "../auth/AuthUserProvider.tsx";
+import { useAuth } from "../auth/AuthUserProvider";
 
 
 const HomePage = () => {
     const [cities, setCities] = useState([]);
+    const { user } = useAuth();
+
+
 
     // Get city data from the backend
     useEffect(() => {
@@ -31,10 +34,19 @@ const HomePage = () => {
     // }, []);
 
     return (
+        <div>
+        {user ? (
         <div style={{ height: '100vh', width: '100vw' }}>
             <MapSvg cities = {cities} style={{ width: '100%', height: '100%' }} />
         </div>
-    );
+        ) : (
+        <div>
+            <p>Welcome to FableTown!</p>
+            <p> Log in to start exploring!⛲️</p>
+        </div>
+        )}
+    </div>
+);
 };
 
 export default HomePage;

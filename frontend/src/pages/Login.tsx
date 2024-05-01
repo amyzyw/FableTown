@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { signInWithGoogle } from '../utils/firebase';
+import { signInWithGoogle, auth } from '../utils/firebase';
+import { useAuth } from "../auth/AuthUserProvider";
+
 
 
 const LoginForm = () => {
@@ -24,7 +26,21 @@ const LoginForm = () => {
 //     setPassword(event.target.value);
 //   };
 
+const { user } = useAuth(); 
+
+const handleLogOut = () => {
+  auth.signOut() // Call Firebase's signOut method to log out the user
+    .then(() => {
+      console.log("User logged out successfully");
+      // You might also want to redirect the user or perform additional actions after logout
+    })
+    .catch((error) => {
+      console.error("Error logging out:", error);
+    });
+};
+
   return (
+
     
     //   <div>
     //     <label htmlFor="username">Username:</label>
@@ -49,7 +65,17 @@ const LoginForm = () => {
     //     />
     //   </div>
     //   <button type="submit">Log In</button>
-      <button onClick={signInWithGoogle}>Sign In with Google</button>);
+    <div>
+    {user ? (
+      <div>
+        <button onClick={handleLogOut}>Log Off</button>
+        </div>
+    ) : (
+      <button onClick={signInWithGoogle}>Log In</button>
+      
+    )}
+    </div>
+  );
 };
 
 export default LoginForm;
