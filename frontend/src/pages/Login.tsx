@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { signInWithGoogle } from '../utils/firebase';
+
 
 const LoginForm = () => {
   // Define state variables for form inputs
@@ -23,6 +25,7 @@ const LoginForm = () => {
   };
 
   return (
+    
     <form onSubmit={handleLogin}>
       <div>
         <label htmlFor="username">Username:</label>
@@ -47,6 +50,7 @@ const LoginForm = () => {
         />
       </div>
       <button type="submit">Log In</button>
+      <button onClick={signInWithGoogle}>Google Sign In</button>;
     </form>
   );
 };
