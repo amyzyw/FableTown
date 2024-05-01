@@ -4,7 +4,6 @@ import { getFirestore } from "firebase/firestore";
 
 // other imports
 import withFirebaseAuth from 'react-with-firebase-auth';
-
 // const firebaseConfig = {
 //   apiKey: import.meta.env.VITE_API_KEY,
 //   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
