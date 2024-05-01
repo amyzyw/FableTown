@@ -6,6 +6,8 @@ import { PATHS } from "./constants/Navigation";
 import AuthUserProvider from "./auth/AuthUserProvider";
 import "./index.css";
 
+// console.log("loading nav", USED_PATH);
+
 const router = createBrowserRouter([
     {
         path: "/",
