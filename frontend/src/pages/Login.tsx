@@ -50,7 +50,7 @@ const LoginForm = () => {
         />
       </div>
       <button type="submit">Log In</button>
-      <button onClick={signInWithGoogle}>Google Sign In</button>;
+      <button onClick={signInWithGoogle}>Sign In with Google</button>;
     </form>
   );
 };
