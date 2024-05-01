@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { City, CityWithId } from "../../../lib/types/index.ts";
 import MapSvg from './Map';
 import { BACKEND_BASE_PATH } from '../constants/Navigation.tsx';
+import AuthUserProvider from "../auth/AuthUserProvider.tsx";
+
 
 const HomePage = () => {
     const [cities, setCities] = useState([]);
