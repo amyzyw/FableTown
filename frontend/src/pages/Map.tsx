@@ -25,6 +25,10 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
                         .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
                         .attr("r", 10)
                         .attr("fill", "red"); // Fill color for the circles
+                        // .attr("onclick", );
+    function toACity() {
+      
+    }
   };
 
   return(

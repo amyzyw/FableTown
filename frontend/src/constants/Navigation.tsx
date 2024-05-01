@@ -30,8 +30,7 @@ export const PATHS: {
     {
         link: "/info",
         label: "Info",
-        element: <CityInfo //Add backend GET for city info？
-        name="Ithaca" description="Corn Hell."/>,
+        element: <CityInfo />,
     },
     {
         link: "/insert",

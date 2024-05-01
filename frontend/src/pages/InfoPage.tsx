@@ -35,18 +35,19 @@ type Props<T> = {
 const CityInfo= <T extends { name: string, description: string, x: number
     y: number}>({name, description, x, y}: Props<T>) => {
 
-    const cityId = 0;
+    const cityId = "1";
 
-    const [editName, setEditName] = useState(name || '');
-    const [editDescription, setEditDescription] = useState(description || '');
-    const [editX, setX] = useState(x || '');
-    const [editY, setY] = useState(y || '');
-    const [city, setCity] = useState([]);
+    // const [editName, setEditName] = useState(name || '');
+    // const [editDescription, setEditDescription] = useState(description || '');
+    // const [editX, setX] = useState('');
+    // const [editY, setY] = useState('');
+    const [city, setCity] = useState('');
 
     useEffect(() => {
         fetch("${BACKEND_BASE_PATH}/${cityId}").then((res) => {
             return res.json();
         }).then((data) => {
+            console.log(data)
             // console.log("DEBUGGER:", data);
             setCity(data);
             //is it possible to add these two below in useEffect?
@@ -58,72 +59,76 @@ const CityInfo= <T extends { name: string, description: string, x: number
     }, []);
     
     
-    // Where the edit and delete codes should go
-    const editInfo = () => {
-        // console.log("Editing Your City's Info:", editName, editDescription);
-        fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: editName, description: editDescription, x: editX, y: editY}),
-        }).then(res => {
-            if (res.ok) {
-                console.log("City Information has been Updated!");
-            } else {
-                console.log("Failure to Update City's Information");
-            }
-        }).catch(error => {
-            console.error("Uh Oh! Error Found While Updating City:", error);
-        });
+    // // Where the edit and delete codes should go
+    // const editInfo = () => {
+    //     // console.log("Editing Your City's Info:", editName, editDescription);
+    //     fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
+    //         method: "PUT",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify({ name: editName, description: editDescription, x: editX, y: editY}),
+    //     }).then(res => {
+    //         if (res.ok) {
+    //             console.log("City Information has been Updated!");
+    //         } else {
+    //             console.log("Failure to Update City's Information");
+    //         }
+    //     }).catch(error => {
+    //         console.error("Uh Oh! Error Found While Updating City:", error);
+    //     });
               
-    };
+    // };
 
-    const deleteInfo = () => {
-        console.log("Deleting Your City:", name);
-        fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
-            method: "DELETE",
-        }).then(res => {
-            if (res.ok) {
-                console.log("Your City is Deleted");
-            } else {
-                console.log("Problem! Failed to Delete Your City");
-            }
-        }).catch(error => {
-            console.error("Uh Oh! Error Found While Deleting City:", error);
-        });
+    // const deleteInfo = () => {
+    //     console.log("Deleting Your City:", name);
+    //     fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
+    //         method: "DELETE",
+    //     }).then(res => {
+    //         if (res.ok) {
+    //             console.log("Your City is Deleted");
+    //         } else {
+    //             console.log("Problem! Failed to Delete Your City");
+    //         }
+    //     }).catch(error => {
+    //         console.error("Uh Oh! Error Found While Deleting City:", error);
+    //     });
               
-    };
+    // };
 
-    const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        //update the state with setSearch (function provided by React's useState)
-        setEditName(event.target.value);
-        setEditDescription(event.target.value);
-        setX(event.target.value);
-        setY(event.target.value);
-    };
+    // const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     //update the state with setSearch (function provided by React's useState)
+    //     setEditName(event.target.value);
+    //     setEditDescription(event.target.value);
+    //     setX(event.target.value);
+    //     setY(event.target.value);
+    // };
 
     return (
-        <form onSubmit={editInfo}>
+        <div>
             <h1>{name}</h1>
             <p>{description}</p>
-            <input type='text' value={editName} 
-                onChange={controlInputChange}
-                placeholder='New Name'
-            />
-            <input value={editDescription} 
-                onChange={controlInputChange}
-                placeholder='New Description'
-            />
-            <input value={editX} 
-                onChange={controlInputChange}
-                placeholder='New X'
-            />
-            <input value={editY} 
-                onChange={controlInputChange}
-                placeholder='New Y'
-            />
-            <button onClick={editInfo}>Save</button>
-            <button onClick={deleteInfo}>Delete</button>
-        </form>
+        </div>
+        // <form onSubmit={editInfo}>
+        //     <h1>{name}</h1>
+        //     <p>{description}</p>
+        //     <input type='text' value={editName} 
+        //         onChange={controlInputChange}
+        //         placeholder='New Name'
+        //     />
+        //     <input value={editDescription} 
+        //         onChange={controlInputChange}
+        //         placeholder='New Description'
+        //     />
+        //     <input value={editX} 
+        //         onChange={controlInputChange}
+        //         placeholder='New X'
+        //     />
+        //     <input value={editY} 
+        //         onChange={controlInputChange}
+        //         placeholder='New Y'
+        //     />
+        //     <button onClick={editInfo}>Save</button>
+        //     <button onClick={deleteInfo}>Delete</button>
+        // </form>
     );
 };
 

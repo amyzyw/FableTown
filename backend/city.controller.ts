@@ -3,7 +3,8 @@ import { City, CityWithId } from "@full-stack/types";
 const cityCollectionRef = db.collection("CityData");
 
 export const getACity = async (cityId: string) => {
-  return await cityCollectionRef.doc(cityId).get();
+  const snapshot = await cityCollectionRef.doc(cityId).get();
+  return snapshot.data();
 };
 
 export const addCity = async (city: City) => {

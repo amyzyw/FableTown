@@ -14,7 +14,6 @@ const HomePage = () => {
         fetch(BACKEND_BASE_PATH).then((res) => {
             return res.json();
         }).then((data) => {
-            console.log(data);
             setCities(data);
         }).catch(() => {
             alert("Something went wrong!");

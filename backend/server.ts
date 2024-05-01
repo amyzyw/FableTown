@@ -14,19 +14,6 @@ app.use(cors());
 app.use(express.json());
 
 // GET ALL city
-// app.get("/", async (req, res) => {
-//     console.log("GET city was called");
-//     try {
-//         return db.collection("Document").get().then((snapshot) => {
-//             console.log(snapshot);
-//             res.json(snapshot.docs);
-//         });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: "Something went wrong" });
-//     }
-// });
-
 app.get("/", async (req, res) => {
   try {
       const snapshot = await db.collection("CityData").get();
@@ -34,7 +21,6 @@ app.get("/", async (req, res) => {
           cityId: doc.id,
           ...doc.data()
       }));
-      // console.log(documents);
       res.json(cities);
   } catch (error) {
       console.error(error);
@@ -47,10 +33,12 @@ app.get('/:cityId', async (req, res) => {
   try {
     const cityId = req.params.cityId;
     const city = await getACity(cityId);
-    console.log("Cities are", city);
+    // const city = cityDoc;
     res.status(200).send({
-      // message: `SUCCESS retrieved all city data to the map in FableTown`
       city
+      // cityId: city.id,
+      // ...city.data()
+      // message: `SUCCESS retrieved all city data to the map in FableTown`
     });
   } catch (error) {
     res.status(500).send('Error retrieving cities');
