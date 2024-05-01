@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
-import { City } from "@full-stack/types";
+import { City, CityWithId } from "@full-stack/types";
 import { db } from "./firebase";
 import path from "path";
 import {getACity, addCity, deleteCity, updateInfo} from './city.controller';
@@ -31,7 +31,7 @@ app.get("/", async (req, res) => {
   try {
       const snapshot = await db.collection("CityData").get();
       const cities = snapshot.docs.map(doc => ({
-          id: doc.id,
+          cityId: doc.id,
           ...doc.data()
       }));
       // console.log(documents);

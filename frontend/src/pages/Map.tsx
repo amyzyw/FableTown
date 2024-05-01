@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
-import { City } from '../../../lib/types/index.ts';
+import { CityWithId } from '../../../lib/types/index.ts';
 
 interface MapSvgProps extends React.SVGProps<SVGSVGElement> {
     // You can extend this interface to include other props specific to your component
-    cities: City[];
+    cities: CityWithId[];
     style: React.CSSProperties;
 }
 
@@ -16,20 +16,15 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
     }
   }, [cities]);
 
-  console.log("here we have",cities)
-
   const drawCities = () => {
-    const svg = d3.select('#fantasyMap');
-    console.log("Drawing")
-
-    svg.selectAll("circle")
-        .data(cities)
-        .enter()
-        .append("circle")
-        .attr("cx", city => city.x) // Assume city data includes 'x' coordinate
-        .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
-        .attr("r", 100)
-        .attr("fill", "red"); // Fill color for the circles
+    const svg = d3.select('svg#fantasyMap');
+    const cityPoints = svg.selectAll("circle").data(cities)
+                        .attr("id", city => city.cityId)
+                        .attr("class", "city-marker")
+                        .attr("cx", city => city.x) // Assume city data includes 'x' coordinate
+                        .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
+                        .attr("r", 10)
+                        .attr("fill", "red"); // Fill color for the circles
   };
 
   return(
