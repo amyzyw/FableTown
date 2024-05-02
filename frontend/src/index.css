@@ -389,7 +389,14 @@ i {
     width: 50%
 }
 
-p {
+h1 {
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+h2 {
     align-items: center;
     justify-content: center;
     align-content: center;

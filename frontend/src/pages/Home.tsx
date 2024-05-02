@@ -40,8 +40,8 @@ const HomePage = () => {
         </div>
         ) : (
         <div id='intro'>
-            <p>Welcome to FableTown! ⛲️</p>
-            <p> Log In to Start Exploring!</p>
+            <h1>Welcome to FableTown! ⛲️</h1>
+            <h2> Log In to Start Exploring!</h2>
         </div>
         )}
     </div>

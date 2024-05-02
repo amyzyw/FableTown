@@ -76,12 +76,12 @@ const handleLoginRedirect = () => {
     <div>
     {user ? (
       <div id='center-container'>
-        <p>You Have Logged In! 🧚‍♀️</p>
+        <h1>BYE! 🧚‍♀️</h1>
         <button onClick={handleLogOut} className='login-button'>Log Out</button>
         </div>
     ) : (
       <div id='center-container'>
-      <p>Your Journey Start Here! 🪸</p>
+      <h1>Your Journey Start Here! 🪸</h1>
       <button onClick={() => {
             signInWithGoogle();
             handleLoginRedirect(); // Call handleLoginRedirect after signing in
