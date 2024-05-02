@@ -55,7 +55,7 @@ export const AuthenticatedPaths: {
         element: <Insert />,
     },
     {
-        link: "/info",
+        link: "/info/:cityId",
         label: "Info",
         element: <CityInfo />,
         

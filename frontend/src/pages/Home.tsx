@@ -31,7 +31,7 @@ const HomePage = () => {
     //         alert("Uh oh!")
     //     })
     // }, []);
-
+    
     return (
         <div>
         {user ? (

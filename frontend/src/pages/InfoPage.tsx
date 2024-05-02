@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 // import cors from "cors";
 //import App from "../App";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
+import { City, CityWithId } from "../../../lib/types/index.ts";
+import { useParams } from "react-router-dom";
 
-type Props<T> = {
-    name?: string;
-    description?: string
-    x?: number
-    y?: number
-};
+
+// type Props<T> = {
+//     name?: string;
+//     description?: string
+//     x?: number
+//     y?: number
+// };
 
 // const app: Express = express();
 // const port = 8080;
@@ -32,32 +35,27 @@ type Props<T> = {
 // });
 
 // display city info page
-const CityInfo= <T extends { name: string, description: string, x: number
-    y: number}>({name, description, x, y}: Props<T>) => {
+const CityInfo= () => {
 
-    const cityId = "1";
+    // const cityId = "1";
+    const params = useParams();
+    const cityId = params.cityId;
 
     // const [editName, setEditName] = useState(name || '');
     // const [editDescription, setEditDescription] = useState(description || '');
     // const [editX, setX] = useState('');
     // const [editY, setY] = useState('');
-    const [city, setCity] = useState('');
+    const [info, setInfo] = useState({ name: '', description: '', x: '', y: '' });
 
     useEffect(() => {
-        fetch("${BACKEND_BASE_PATH}/${cityId}").then((res) => {
+        fetch(`${BACKEND_BASE_PATH}${cityId}`).then((res) => {
             return res.json();
         }).then((data) => {
-            console.log(data)
-            // console.log("DEBUGGER:", data);
-            setCity(data);
-            //is it possible to add these two below in useEffect?
-            //setEditName(data.name);
-            //setEditDescription(data.description);
+            setInfo(data);
         }).catch(() => {
-            alert("Something went wrong!");
+            alert("Something went wrong fetching city info!");
         });
     }, []);
-    
     
     // // Where the edit and delete codes should go
     // const editInfo = () => {
@@ -104,8 +102,8 @@ const CityInfo= <T extends { name: string, description: string, x: number
 
     return (
         <div>
-            <h1>{name}</h1>
-            <p>{description}</p>
+            <h1>{info.name}</h1>
+            <p>{info.description}</p>
         </div>
         // <form onSubmit={editInfo}>
         //     <h1>{name}</h1>

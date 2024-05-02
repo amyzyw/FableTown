@@ -33,13 +33,10 @@ app.get('/:cityId', async (req, res) => {
   try {
     const cityId = req.params.cityId;
     const city = await getACity(cityId);
-    // const city = cityDoc;
-    res.status(200).send({
-      city
-      // cityId: city.id,
-      // ...city.data()
-      // message: `SUCCESS retrieved all city data to the map in FableTown`
-    });
+    res.json(city);
+    // res.status(200).send({
+    //   city
+    // });
   } catch (error) {
     res.status(500).send('Error retrieving cities');
   }

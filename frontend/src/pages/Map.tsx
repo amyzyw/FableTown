@@ -24,11 +24,20 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
                         .attr("cx", city => city.x) // Assume city data includes 'x' coordinate
                         .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
                         .attr("r", 10)
-                        .attr("fill", "red"); // Fill color for the circles
-                        // .attr("onclick", );
-    function toACity() {
-      
-    }
+                        .attr("fill", "red") // Fill color for the circles
+                        .on("mouseover", function (event,d) {
+                          d3.select(this).attr("opacity", 0.3)
+                                          .attr("cursor", "pointer")})
+                        .on("click", function (event: MouseEvent) {
+                          const element = event.currentTarget as HTMLElement;
+                          // console.log("CLICKED", element.id);
+                          window.location.href = `/info/${element.id}`
+                          // push this element.id to infopage
+                          
+                          // take to info page with the ur/ "/info"
+                        })
+                        .on("mouseout", function (event,d) {
+                            d3.select(this).attr("opacity", 1);})
   };
 
   return(

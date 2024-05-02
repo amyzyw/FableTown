@@ -1,7 +1,7 @@
 import { HeaderSimple } from "../components/Header";
 import { PATHS, AuthenticatedPaths} from "../constants/Navigation";
 import { Outlet } from "react-router-dom";
-import AuthUserProvider, { useAuth } from "../auth/AuthUserProvider";
+import { useAuth } from "../auth/AuthUserProvider";
 
 
 const RootLayout = () => {
