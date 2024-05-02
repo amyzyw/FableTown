@@ -39,9 +39,9 @@ const HomePage = () => {
             <MapSvg cities = {cities} style={{ width: '100%', height: '100%' }} />
         </div>
         ) : (
-        <div>
-            <p>Welcome to FableTown!</p>
-            <p> Log in to start exploring!⛲️</p>
+        <div id='intro'>
+            <p>Welcome to FableTown! ⛲️</p>
+            <p> Log In to Start Exploring!</p>
         </div>
         )}
     </div>

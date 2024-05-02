@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
 import { City } from "../../../lib/types/index";
+import { useNavigate } from "react-router-dom"; 
+
 
 const Insert = () => {
 
@@ -9,6 +11,7 @@ const Insert = () => {
     const [description, setDescription] = useState('');
     const [x, setX] = useState<number>(0);
     const [y, setY] = useState<number>(0);
+    const navigate = useNavigate();
 
   // Handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -32,7 +35,18 @@ const Insert = () => {
     }).catch(() => {
         alert("Uh oh!")
     })
+
+  //   if (user) {
+  //     handleLoginRedirect(); // Redirect user after successful form submission
+  //   } else {
+  //     // Handle non-logged-in user scenario (e.g., show error message)
+  //   }
+  // };
+    navigate("/");
+
   };
+
+
 
   // Handle input changes for name field
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +86,8 @@ const Insert = () => {
   // }, []);
 
   return (
-            <form onSubmit={handleSubmit}>
+            <div id='insert-form'>
+            <form onSubmit={handleSubmit} id='center-container'>
               <label>
                 Name of the place:
                 <input type="text" value={name}
@@ -86,16 +101,16 @@ const Insert = () => {
                 />
               </label>
               <label>
-                Location of the place:
-                X:
+                X Coordinate:
                 <input type="number" value={x} 
                 onChange={handleXChange}/>
-                Y:
+                Y Coordinate:
                 <input type="number" value={y}
                 onChange={handleYChange}/>
               </label>
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Submit" id='input'/>
             </form>
+            </div>
           );
 }
 export default Insert;

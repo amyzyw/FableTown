@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { signInWithGoogle, auth } from '../utils/firebase';
 import { useAuth } from "../auth/AuthUserProvider";
+import { useNavigate } from "react-router-dom"; 
 
 
 
@@ -27,17 +27,25 @@ const LoginForm = () => {
 //   };
 
 const { user } = useAuth(); 
+const navigate = useNavigate();
 
 const handleLogOut = () => {
   auth.signOut() // Call Firebase's signOut method to log out the user
     .then(() => {
       console.log("User logged out successfully");
+      navigate("/");
       // You might also want to redirect the user or perform additional actions after logout
     })
     .catch((error) => {
       console.error("Error logging out:", error);
     });
 };
+
+const handleLoginRedirect = () => {
+    navigate("/");
+
+};
+
 
   return (
 
@@ -67,12 +75,18 @@ const handleLogOut = () => {
     //   <button type="submit">Log In</button>
     <div>
     {user ? (
-      <div>
-        <button onClick={handleLogOut}>Log Off</button>
+      <div id='center-container'>
+        <p>You Have Logged In! 🧚‍♀️</p>
+        <button onClick={handleLogOut} className='login-button'>Log Out</button>
         </div>
     ) : (
-      <button onClick={signInWithGoogle}>Log In</button>
-      
+      <div id='center-container'>
+      <p>Your Journey Start Here! 🪸</p>
+      <button onClick={() => {
+            signInWithGoogle();
+            handleLoginRedirect(); // Call handleLoginRedirect after signing in
+          }} className='login-button'>Log In</button>
+      </div>
     )}
     </div>
   );

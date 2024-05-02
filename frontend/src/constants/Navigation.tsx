@@ -29,7 +29,7 @@ export const PATHS: {
     },
     {
         link: "/login",
-        label: "Login",
+        label: "Log In",
         element: <LoginForm />,
     }
 ];
@@ -39,7 +39,16 @@ export const AuthenticatedPaths: {
     label: string;
     element?: JSX.Element;
 }[] = [
-    ...PATHS, // Include all paths from NavigationPaths
+    {
+        link: "/",
+        label: "Home",
+        element: <HomePage />,
+    },
+    {
+        link: "/login",
+        label: "Log Out",
+        element: <LoginForm />,
+    }, 
     {
         link: "/insert",
         label: "Insert",
