@@ -1,5 +1,5 @@
 import { HeaderSimple } from "../components/Header";
-import { PATHS, AuthenticatedPaths} from "../constants/Navigation";
+import { PATHS, AuthenticatedPaths, NavPaths} from "../constants/Navigation";
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../auth/AuthUserProvider";
 
@@ -9,7 +9,7 @@ const RootLayout = () => {
 
     return (
         <div>
-            <HeaderSimple links={user ? AuthenticatedPaths : PATHS} />
+            <HeaderSimple links={user ? NavPaths : PATHS} />
             <div>
                 <Outlet />
             </div>

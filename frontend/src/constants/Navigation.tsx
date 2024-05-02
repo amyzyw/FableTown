@@ -61,3 +61,25 @@ export const AuthenticatedPaths: {
         
     }
 ];
+
+export const NavPaths: {
+    link: string;
+    label: string;
+    element?: JSX.Element;
+}[] = [
+    {
+        link: "/",
+        label: "Home",
+        element: <HomePage />,
+    },
+    {
+        link: "/login",
+        label: "Log Out",
+        element: <LoginForm />,
+    }, 
+    {
+        link: "/insert",
+        label: "Insert",
+        element: <Insert />,
+    }
+];
