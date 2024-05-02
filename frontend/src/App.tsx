@@ -2,11 +2,9 @@ import { MantineProvider } from "@mantine/core";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/Error";
 import RootLayout from "./layouts/RootLayout";
-import { PATHS } from "./constants/Navigation";
+import { PATHS, AuthenticatedPaths} from "./constants/Navigation";
 import AuthUserProvider from "./auth/AuthUserProvider";
 import "./index.css";
-
-// console.log("loading nav", USED_PATH);
 
 const router = createBrowserRouter([
     {
@@ -14,7 +12,7 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         errorElement: <ErrorPage />,
         children: [
-            ...PATHS.map((item) => ({
+            ...AuthenticatedPaths.map((item) => ({
                 path: item.link,
                 element: item.element,
             })),
@@ -23,11 +21,12 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
+    console.log("route:", AuthenticatedPaths)
     return (
         <AuthUserProvider>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
-            <RouterProvider router={router} />
-        </MantineProvider>
+            <MantineProvider withGlobalStyles withNormalizeCSS>
+                <RouterProvider router={router} />
+            </MantineProvider>
         </AuthUserProvider>
     );
 }
