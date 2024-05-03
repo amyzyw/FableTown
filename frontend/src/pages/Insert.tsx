@@ -16,7 +16,7 @@ const Insert = () => {
   // Handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Submitted:', { name, description, x, y });
+    // console.log('Submitted:', { name, description, x, y });
     // const submitted = { name, description, x, y }
     // Add your logic to submit the form data to a backend or perform other actions
     fetch(`${BACKEND_BASE_PATH}addCity/`,{

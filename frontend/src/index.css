@@ -465,4 +465,8 @@ label.input {
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .city-marker {
+    fill: rgb(60, 118, 219);
+  }
   

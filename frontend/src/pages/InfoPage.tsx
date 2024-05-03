@@ -6,34 +6,6 @@ import { BACKEND_BASE_PATH } from "../constants/Navigation";
 import { City, CityWithId } from "../../../lib/types/index.ts";
 import { useParams } from "react-router-dom";
 
-
-// type Props<T> = {
-//     name?: string;
-//     description?: string
-//     x?: number
-//     y?: number
-// };
-
-// const app: Express = express();
-// const port = 8080;
-
-// app.use(cors());
-// app.use(express.json());
-
-// app.put('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
-//     const { name, description } = req.body;
-//     console.log("Editing Your City's Information:", name, description);
-//     res.status(200).send({ message: "City Information is Updated!" });
-//     //res.status(404).json({ error: "Oh No! Failure to Update City's Info" });
-// });
-
-// app.delete('${BACKEND_BASE_PATH}/city-info/:id', (req: Request, res: Response) => {
-//     const cityDelete = req.params.name;
-//     console.log("Deleting Your City:", cityDelete);
-//     res.status(200).send({ message: "City Deleted Successfully" });
-//     //res.status(404).json({ error: "Oh No! Failure to Delete City" });
-// });
-
 // display city info page
 const CityInfo= () => {
 
@@ -76,21 +48,15 @@ const CityInfo= () => {
               
     // };
 
-    // const deleteInfo = () => {
-    //     console.log("Deleting Your City:", name);
-    //     fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
-    //         method: "DELETE",
-    //     }).then(res => {
-    //         if (res.ok) {
-    //             console.log("Your City is Deleted");
-    //         } else {
-    //             console.log("Problem! Failed to Delete Your City");
-    //         }
-    //     }).catch(error => {
-    //         console.error("Uh Oh! Error Found While Deleting City:", error);
-    //     });
-              
-    // };
+    const deleteInfo = () => {
+        fetch(`${BACKEND_BASE_PATH}${cityId}`, {
+            method: "DELETE",
+        }).then((res) => {
+            window.location.href = `/`;
+        }).catch(() => {
+            alert("Something went wrong fetching city info!");
+        });
+    };
 
     // const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //     //update the state with setSearch (function provided by React's useState)
@@ -104,6 +70,7 @@ const CityInfo= () => {
         <div>
             <h1>{info.name}</h1>
             <p>{info.description}</p>
+            <button onClick={deleteInfo}>Delete</button>
         </div>
         // <form onSubmit={editInfo}>
         //     <h1>{name}</h1>

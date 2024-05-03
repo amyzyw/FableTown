@@ -21,7 +21,6 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-    console.log("route:", AuthenticatedPaths)
     return (
         <AuthUserProvider>
             <MantineProvider withGlobalStyles withNormalizeCSS>

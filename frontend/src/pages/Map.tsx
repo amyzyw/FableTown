@@ -27,17 +27,13 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
                         .attr("fill", "red") // Fill color for the circles
                         .on("mouseover", function (event,d) {
                           d3.select(this).attr("opacity", 0.3)
-                                          .attr("cursor", "pointer")})
+                                          .attr("cursor", "pointer");})
+                        .on("mouseout", function (event,d) {
+                                            d3.select(this).attr("opacity", 1);})
                         .on("click", function (event: MouseEvent) {
                           const element = event.currentTarget as HTMLElement;
-                          // console.log("CLICKED", element.id);
-                          window.location.href = `/info/${element.id}`
-                          // push this element.id to infopage
-                          
-                          // take to info page with the ur/ "/info"
+                          window.location.href = `/info/${element.id}`;
                         })
-                        .on("mouseout", function (event,d) {
-                            d3.select(this).attr("opacity", 1);})
   };
 
   return(
