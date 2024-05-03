@@ -75,6 +75,8 @@ const Insert = () => {
 
 
   return (
+    <div>
+      <p className='p-norm'>🏙️ Create your own city from scratch, customizing every detail to suit your vision and strategy! 🏙️</p>
             <div className='insert-form'>
             <form onSubmit={handleSubmit} className='center-container'>
               <label>
@@ -119,6 +121,7 @@ const Insert = () => {
               <input type="submit" value="Submit" id='input'/>
             </form>
             </div>
+    </div>
           );
 }
 export default Insert;
