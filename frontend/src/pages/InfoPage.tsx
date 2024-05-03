@@ -88,36 +88,50 @@ const CityInfo= () => {
 
     return (
         <div>
-            <div>
+            <div id="button-group">
                 <h1>{info.name}</h1>
                 <p>{info.description}</p>
                 <button onClick={popForm}>Edit</button>
                 <button onClick={deleteInfo}>Delete</button>
                 <button onClick={backToMap}>Back to Map</button>
             </div>
-
+            <div className='insert-form'>
             {showForm && (
-                <form onSubmit={editInfo}>
+                <form onSubmit={editInfo} className='center-container'>
+                    <label>
+                    Name of the city:
                     <input type='text' value={editName} 
                         onChange={controlNameChange}
                         placeholder= {info.name}
                     />
-                    <input value={editDescription} 
+                    </label>
+                    <label>
+                    Description
+                    <input type="textarea"
+                        value={editDescription} 
                         onChange={controlDescriptionChange}
                         placeholder= {info.description}
                     />
-                    <input value={editX} 
+                    </label>
+                    <label>
+                    X Coordinate:
+                    <input type="number"
+                        value={editX} 
                         onChange={controlXChange}
                         placeholder= {info.x.toString()}
                     />
-                    <input value={editY} 
+                    Y Coordinate:
+                    <input type="number"
+                        value={editY} 
                         onChange={controlYChange}
                         placeholder= {info.y.toString()}
                     />
+                    </label>
                     <button onClick={editInfo}>Save</button>
                 </form>
+                
             )}
-
+            </div>
         </div>
     );
 };

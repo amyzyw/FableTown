@@ -390,7 +390,7 @@ i {
     justify-content: center;
     margin: auto;
     text-align: center;
-    width: 50%
+    width: 30%
 }
 
 h1 {
@@ -412,46 +412,35 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 
-/* label {
-    margin-top: 30px;
-}
-
-label.input {
-    margin-top: 30px;
-}
-
-#input {
-    margin-top: 30px;
-} */
-
-#insert-form {
+.insert-form {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+    margin: 30px;
   }
 
-  form {
-    width: 300px; /* Adjust width as needed */
+form {
+    width: 300px; 
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
   }
 
-  label {
+label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
   }
 
-  input[type="text"],
-  input[type="number"],
-  input[type="textarea"] {
+input[type="text"],
+input[type="number"],
+input[type="textarea"] {
     width: calc(100% - 10px); /* Adjust width as needed */
     padding: 5px;
     border: 1px solid #ccc;
@@ -460,15 +449,48 @@ label.input {
   }
 
   input[type="submit"] {
-    width: 100%;
+    width: 30%;
     padding: 10px;
     margin-top: 15px;
-    background-color: #007bff;
+    background-color: #7fb9f8;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
+
+  input[type="submit"]:hover {
+    background-color: #93a2d8;
+    color: #fff;
+  }
+
+  button {
+    width: 30%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #7fb9f8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #93a2d8;
+    color: #fff;
+  }
+
+  #button-group {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+
+
 
   /* .city-marker {
     fill: rgb(60, 118, 219);

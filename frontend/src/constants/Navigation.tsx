@@ -24,7 +24,7 @@ export const PATHS: {
 }[] = [
     {
         link: "/",
-        label: "Home",
+        label: "My FableTown",
         element: <HomePage />,
     },
     {
@@ -41,17 +41,12 @@ export const AuthenticatedPaths: {
 }[] = [
     {
         link: "/",
-        label: "Home",
+        label: "My FableTown",
         element: <HomePage />,
     },
     {
-        link: "/login",
-        label: "Log Out",
-        element: <LoginForm />,
-    }, 
-    {
         link: "/insert",
-        label: "Insert",
+        label: "Create New City",
         element: <Insert />,
     },
     {
@@ -59,7 +54,12 @@ export const AuthenticatedPaths: {
         label: "Info",
         element: <CityInfo />,
         
-    }
+    },
+    {
+        link: "/login",
+        label: "Log Out",
+        element: <LoginForm />,
+    }, 
 ];
 
 export const NavPaths: {
@@ -69,17 +69,17 @@ export const NavPaths: {
 }[] = [
     {
         link: "/",
-        label: "Home",
+        label: "My FableTown",
         element: <HomePage />,
+    },
+    {
+        link: "/insert",
+        label: "Create New City",
+        element: <Insert />,
     },
     {
         link: "/login",
         label: "Log Out",
         element: <LoginForm />,
     }, 
-    {
-        link: "/insert",
-        label: "Insert",
-        element: <Insert />,
-    }
 ];
