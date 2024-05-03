@@ -22,15 +22,6 @@ const HomePage = () => {
             alert("Something went wrong!");
         });
     }, []);
-
-
-    // useEffect(() => {
-    //     fetch(`${BACKEND_BASE_PATH}cities/`).then((res) => res.json()).then((data) => {
-    //         console.log("RECEIVED CITIES: ", data);
-    //     }).catch(() => {
-    //         alert("Uh oh!")
-    //     })
-    // }, []);
     
     return (
         <div>

@@ -11,14 +11,13 @@ const Insert = () => {
     const [description, setDescription] = useState('');
     const [x, setX] = useState<number>(0);
     const [y, setY] = useState<number>(0);
+    const [type, setType] = useState('');
+    const [size, setSize] = useState<number>(0);
     const navigate = useNavigate();
 
   // Handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log('Submitted:', { name, description, x, y });
-    // const submitted = { name, description, x, y }
-    // Add your logic to submit the form data to a backend or perform other actions
     fetch(`${BACKEND_BASE_PATH}addCity/`,{
       method: 'POST',
       headers: {
@@ -27,7 +26,9 @@ const Insert = () => {
       body: JSON.stringify({name: name,
                             description: description,
                             x: x,
-                            y:y
+                            y:y,
+                            type: type,
+                            size: size  
       }),
     },).then((res) => res.json()).then((data) => {
         console.log("RECEIVED CITIES: ", data);
@@ -35,15 +36,7 @@ const Insert = () => {
     }).catch(() => {
         alert("Uh oh!")
     })
-
-  //   if (user) {
-  //     handleLoginRedirect(); // Redirect user after successful form submission
-  //   } else {
-  //     // Handle non-logged-in user scenario (e.g., show error message)
-  //   }
-  // };
     navigate("/");
-
   };
 
 
@@ -64,26 +57,15 @@ const Insert = () => {
     const handleYChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setY(Number(event.target.value));
     };
-  
-  //   useEffect(() => {
-  //     console.log("here")
-  //     fetch(`${BACKEND_BASE_PATH}addCity/`,{
-  //       method: 'POST',
-  //       headers: {
-  //         'content-type': 'application/json',
-  //       },
-  //       body: JSON.stringify({name: name,
-  //                             description: description,
-  //                             x: x,
-  //                             y:y
-  //       }),
-  //     },).then((res) => res.json()).then((data) => {
-  //         console.log("RECEIVED CITIES: ", data);
-  //         return data.city
-  //     }).catch(() => {
-  //         alert("Uh oh!")
-  //     })
-  // }, []);
+  // Handle input changes for x field
+  const handleTypeChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+    setType(event.target.value)
+};
+// Handle input changes for y field
+  const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSize(Number(event.target.value));
+  };
+
 
   return (
             <div id='insert-form'>
@@ -108,6 +90,20 @@ const Insert = () => {
                 <input type="number" value={y}
                 onChange={handleYChange}/>
               </label>
+              <label htmlFor="select">Town Type:
+                  <select name="select" id="select" onChange={handleTypeChange} required>
+                    <option value="" disabled>Select</option>
+                    <option value="City">City</option>
+                    <option value="Military">Military</option>
+                    <option value="Industrial">Industrial</option>
+                  </select>
+              </label>
+              <label>
+                Size:
+                <input type="number" value={x} 
+                onChange={handleSizeChange}/>
+              </label>
+
               <input type="submit" value="Submit" id='input'/>
             </form>
             </div>

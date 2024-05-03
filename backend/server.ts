@@ -45,8 +45,8 @@ app.get('/:cityId', async (req, res) => {
 // ADD a city
 app.post("/addCity", async (req, res) => {
   try {
-    const { name, description, x, y } = req.body;
-    const city: City = { name, description, x, y };
+    const { name, description, x, y, size, type } = req.body;
+    const city: City = { name, description, x, y, size, type };
     await addCity(city);
 
     res.status(200).send({
@@ -78,10 +78,10 @@ app.delete("/:cityId", async (req, res) => {
 // UPDATE a city info
 app.put("/:cityId", async (req, res) => {
   try {
-    const { name, description, x, y} = req.body;
+    const { name, description, x, y, size, type} = req.body;
     const cityId = req.params.cityId;
 
-    await updateInfo(cityId, name, description, x, y);
+    await updateInfo(cityId, name, description, x, y, size, type);
 
     res.status(200).send({
       message: `SUCCESS updated city info with id: ${cityId} from the map in FableTown`,

@@ -5,6 +5,8 @@ export type City = {
     description: string;
     x: number;
     y: number;
+    size: number;
+    type: string;
   };
   
   export type CityWithId = City & {
