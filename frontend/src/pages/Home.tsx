@@ -8,8 +8,6 @@ const HomePage = () => {
     const [cities, setCities] = useState([]);
     const { user } = useAuth();
 
-
-
     // Get city data from the backend
     useEffect(() => {
         fetch(BACKEND_BASE_PATH).then((res) => {
@@ -26,9 +24,6 @@ const HomePage = () => {
         {user ? (
         <div style={{ height: '100vh', width: '100vw' }}>
             <p className='p-norm'>🗺️ Welcome to the sprawling map of FableTown, where your imagination knows no bounds! 🗺️</p> 
-            {/* <p className='p-norm'>🏰 Here, you can view all the magnificent cities you've created, each a testament to your creativity and strategic acumen. </p> 
-            <p className='p-norm'>⭐️ Explore your expanding empire, connect trade routes, and forge alliances with other players across this vast and dynamic world. </p> 
-            <p className='p-norm'>🎨 The map is your canvas; let your cities paint the picture of your legendary reign! </p> */}
             <MapSvg cities = {cities} style={{ width: '100%', height: '100%' }} />
         </div>
         ) : (

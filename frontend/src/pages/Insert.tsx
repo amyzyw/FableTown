@@ -18,7 +18,7 @@ const Insert = () => {
   // Handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`${BACKEND_BASE_PATH}addCity/`,{
+    fetch(`${BACKEND_BASE_PATH}/addCity/`,{
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -32,7 +32,6 @@ const Insert = () => {
                             color: color
       }),
     },).then((res) => res.json()).then((data) => {
-        console.log("RECEIVED CITIES: ", data);
         return data
     }).catch(() => {
         alert("Uh oh!")

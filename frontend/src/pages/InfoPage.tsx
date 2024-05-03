@@ -22,14 +22,14 @@ const CityInfo= () => {
     const [editColor, setColor] = useState(info.color || '');
 
     useEffect(() => {
-        fetch(`${BACKEND_BASE_PATH}${cityId}`).then((res) => {
+        fetch(`${BACKEND_BASE_PATH}/${cityId}`).then((res) => {
             return res.json();
         }).then((data) => {
             setInfo(data);
         }).catch(() => {
             alert("Something went wrong fetching city info!");
         });
-    }, []);
+    }, [cityId]);
 
     // Populate edit variables with data
     useEffect(() => {
@@ -43,7 +43,7 @@ const CityInfo= () => {
     }, [info]);
 
     const editInfo = () => {
-        fetch(`${BACKEND_BASE_PATH}${cityId}`, {
+        fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: editName, 
@@ -61,7 +61,7 @@ const CityInfo= () => {
     };
 
     const deleteInfo = () => {
-        fetch(`${BACKEND_BASE_PATH}${cityId}`, {
+        fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
             method: "DELETE",
         }).then((res) => {
             window.location.href = `/`;

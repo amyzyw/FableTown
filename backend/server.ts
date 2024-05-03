@@ -1,8 +1,7 @@
 import express, { Express } from "express";
 import cors from "cors";
-import { City, CityWithId } from "@full-stack/types";
+import { City } from "@full-stack/types";
 import { db } from "./firebase";
-import path from "path";
 import {getACity, addCity, deleteCity, updateInfo} from './city.controller';
 
 const app: Express = express();
@@ -12,6 +11,11 @@ const port = 8080;
 
 app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');  // or 'unsafe-none' or 'credentialless'
+  next();
+});
 
 // GET ALL city
 app.get("/", async (req, res) => {

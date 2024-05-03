@@ -3,7 +3,6 @@ import * as d3 from 'd3';
 import { CityWithId } from '../../../lib/types/index.ts';
 
 interface MapSvgProps extends React.SVGProps<SVGSVGElement> {
-    // You can extend this interface to include other props specific to your component
     cities: CityWithId[];
     style: React.CSSProperties;
 }
@@ -39,7 +38,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
                               .attr('fill', city.color);
              })
              .on('click', function(event) {
-                window.location.href = `/info/${city.cityId}`;
+                window.location.href = `/${city.cityId}`;
              });
           break;
         case 'Military':
@@ -59,7 +58,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
                               .attr('fill', city.color);
              })
              .on('click', function(event) {
-                window.location.href = `/info/${city.cityId}`;
+                window.location.href = `/${city.cityId}`;
              });
           break;
         case 'Industrial':
@@ -79,7 +78,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
                               .attr('fill', city.color);
              })
              .on('click', function(event) {
-                window.location.href = `/info/${city.cityId}`;
+                window.location.href = `/${city.cityId}`;
              });
           break;
       }
