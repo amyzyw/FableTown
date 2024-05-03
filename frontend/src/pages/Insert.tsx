@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
-import { City } from "../../../lib/types/index";
 import { useNavigate } from "react-router-dom"; 
 
 

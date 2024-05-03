@@ -1,6 +1,4 @@
-// import * as d3 from 'd3';
-import React, { useEffect, useState } from 'react';
-import { City, CityWithId } from "../../../lib/types/index.ts";
+import { useEffect, useState } from 'react';
 import MapSvg from './Map';
 import { BACKEND_BASE_PATH } from '../constants/Navigation.tsx';
 import { useAuth } from "../auth/AuthUserProvider";

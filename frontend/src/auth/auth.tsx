@@ -1,4 +1,4 @@
-import { auth } from "./utils/firebase";
+import { auth } from "../utils/firebase.tsx";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();

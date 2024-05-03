@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-// import express, { Express, Request, Response } from "express";
-// import cors from "cors";
-//import App from "../App";
 import { BACKEND_BASE_PATH } from "../constants/Navigation";
-import { City, CityWithId } from "../../../lib/types/index.ts";
 import { useParams } from "react-router-dom";
 
 

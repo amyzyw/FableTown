@@ -1,5 +1,5 @@
 import { HeaderSimple } from "../components/Header";
-import { PATHS, AuthenticatedPaths, NavPaths} from "../constants/Navigation";
+import { PATHS, NavPaths} from "../constants/Navigation";
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../auth/AuthUserProvider";
 
