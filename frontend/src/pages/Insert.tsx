@@ -68,10 +68,10 @@ const Insert = () => {
 
 
   return (
-            <div id='insert-form'>
-            <form onSubmit={handleSubmit} id='center-container'>
+            <div className='insert-form'>
+            <form onSubmit={handleSubmit} className='center-container'>
               <label>
-                Name of the place:
+                Name of the city:
                 <input type="text" value={name}
                 onChange={handleNameChange}
                 required/>

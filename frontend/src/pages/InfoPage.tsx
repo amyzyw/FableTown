@@ -105,7 +105,7 @@ const CityInfo= () => {
 
     return (
         <div>
-            <div>
+            <div id="button-group">
                 <h1>{info.name}</h1>
                 <p>{info.description}</p>
                 <p>Town Type: {info.type}</p>
@@ -114,29 +114,34 @@ const CityInfo= () => {
                 <button onClick={deleteInfo}>Delete</button>
                 <button onClick={backToMap}>Back to Map</button>
             </div>
-
+            <div className='insert-form'>
             {showForm && (
-                <form onSubmit={editInfo}>
-                    <label>Name of the place:
+                <form onSubmit={editInfo} className='center-container'>
+                    <label>
+                    Name of the city:
                     <input type='text' value={editName} 
                         onChange={controlNameChange}
                         placeholder= {info.name}
                     />
                     </label>
-                    <label>Description:
-                    <input value={editDescription} 
+                    <label>
+                    Description
+                    <input type="textarea"
+                        value={editDescription} 
                         onChange={controlDescriptionChange}
                         placeholder= {info.description}
                     />
                     </label>
-                    <label>X Coordinate:
-                    <input value={editX} 
+                    <label>
+                    X Coordinate:
+                    <input type="number"
+                        value={editX} 
                         onChange={controlXChange}
                         placeholder= {info.x.toString()}
                     />
-                    </label>
-                    <label>Y Coordinate:
-                    <input value={editY} 
+                    Y Coordinate:
+                    <input type="number"
+                        value={editY} 
                         onChange={controlYChange}
                         placeholder= {info.y.toString()}
                     />
@@ -157,8 +162,9 @@ const CityInfo= () => {
                     </label>
                     <button onClick={editInfo}>Save</button>
                 </form>
+                
             )}
-
+            </div>
         </div>
     );
 };
