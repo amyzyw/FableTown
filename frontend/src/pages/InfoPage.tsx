@@ -6,18 +6,18 @@ import { BACKEND_BASE_PATH } from "../constants/Navigation";
 import { City, CityWithId } from "../../../lib/types/index.ts";
 import { useParams } from "react-router-dom";
 
+
 // display city info page
 const CityInfo= () => {
 
-    // const cityId = "1";
     const params = useParams();
     const cityId = params.cityId;
 
-    // const [editName, setEditName] = useState(name || '');
-    // const [editDescription, setEditDescription] = useState(description || '');
-    // const [editX, setX] = useState('');
-    // const [editY, setY] = useState('');
-    const [info, setInfo] = useState({ name: '', description: '', x: '', y: '' });
+    const [info, setInfo] = useState({ name: '', description: '', x: 0, y: 0 });
+    const [editName, setEditName] = useState(info.name || '');
+    const [editDescription, setEditDescription] = useState(info.description || '');
+    const [editX, setX] = useState(info.x || 0);
+    const [editY, setY] = useState(info.y || 0);
 
     useEffect(() => {
         fetch(`${BACKEND_BASE_PATH}${cityId}`).then((res) => {
@@ -28,25 +28,26 @@ const CityInfo= () => {
             alert("Something went wrong fetching city info!");
         });
     }, []);
-    
-    // // Where the edit and delete codes should go
-    // const editInfo = () => {
-    //     // console.log("Editing Your City's Info:", editName, editDescription);
-    //     fetch(`${BACKEND_BASE_PATH}/${cityId}`, {
-    //         method: "PUT",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify({ name: editName, description: editDescription, x: editX, y: editY}),
-    //     }).then(res => {
-    //         if (res.ok) {
-    //             console.log("City Information has been Updated!");
-    //         } else {
-    //             console.log("Failure to Update City's Information");
-    //         }
-    //     }).catch(error => {
-    //         console.error("Uh Oh! Error Found While Updating City:", error);
-    //     });
-              
-    // };
+
+    // Populate edit variables with data
+    useEffect(() => {
+        setEditName(info.name);
+        setEditDescription(info.description);
+        setX(info.x);
+        setY(info.y);
+    }, [info]);
+
+    const editInfo = () => {
+        fetch(`${BACKEND_BASE_PATH}${cityId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: editName, description: editDescription, x: editX, y: editY}),
+        }).then(res => {
+            res.json();
+        }).catch(error => {
+            console.error("Uh Oh! Error Found While Updating City:", error);
+        });
+    };
 
     const deleteInfo = () => {
         fetch(`${BACKEND_BASE_PATH}${cityId}`, {
@@ -58,42 +59,49 @@ const CityInfo= () => {
         });
     };
 
-    // const controlInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     //update the state with setSearch (function provided by React's useState)
-    //     setEditName(event.target.value);
-    //     setEditDescription(event.target.value);
-    //     setX(event.target.value);
-    //     setY(event.target.value);
-    // };
+    const controlNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEditName(event.target.value);
+    };
+
+    const controlDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEditDescription(event.target.value);
+    };
+
+    const controlXChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setX(Number(event.target.value));
+    };
+
+    const controlYChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setY(Number(event.target.value));
+    };
 
     return (
         <div>
-            <h1>{info.name}</h1>
-            <p>{info.description}</p>
-            <button onClick={deleteInfo}>Delete</button>
+            <div>
+                <h1>{info.name}</h1>
+                <p>{info.description}</p>
+                <button onClick={deleteInfo}>Delete</button>
+            </div>
+            <form onSubmit={editInfo}>
+                <input type='text' value={editName} 
+                    onChange={controlNameChange}
+                    placeholder= {info.name}
+                />
+                <input value={editDescription} 
+                    onChange={controlDescriptionChange}
+                    placeholder= {info.description}
+                />
+                <input value={editX} 
+                    onChange={controlXChange}
+                    placeholder= {info.x.toString()}
+                />
+                <input value={editY} 
+                    onChange={controlYChange}
+                    placeholder= {info.y.toString()}
+                />
+                <button onClick={editInfo}>Save</button>
+            </form>
         </div>
-        // <form onSubmit={editInfo}>
-        //     <h1>{name}</h1>
-        //     <p>{description}</p>
-        //     <input type='text' value={editName} 
-        //         onChange={controlInputChange}
-        //         placeholder='New Name'
-        //     />
-        //     <input value={editDescription} 
-        //         onChange={controlInputChange}
-        //         placeholder='New Description'
-        //     />
-        //     <input value={editX} 
-        //         onChange={controlInputChange}
-        //         placeholder='New X'
-        //     />
-        //     <input value={editY} 
-        //         onChange={controlInputChange}
-        //         placeholder='New Y'
-        //     />
-        //     <button onClick={editInfo}>Save</button>
-        //     <button onClick={deleteInfo}>Delete</button>
-        // </form>
     );
 };
 
