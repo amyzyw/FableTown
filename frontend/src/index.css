@@ -45,6 +45,10 @@ button {
     font-weight: 500;
 }
 
+button:hover{
+    cursor: pointer;
+} 
+
 textarea:hover,
 input:hover,
 button:hover {
@@ -466,7 +470,7 @@ label.input {
     cursor: pointer;
   }
 
-  .city-marker {
+  /* .city-marker {
     fill: rgb(60, 118, 219);
-  }
+  } */
   

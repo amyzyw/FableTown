@@ -14,6 +14,9 @@ const CityInfo= () => {
     const cityId = params.cityId;
 
     const [info, setInfo] = useState({ name: '', description: '', x: 0, y: 0 });
+
+    const [showForm, setShowForm] = useState(false);
+
     const [editName, setEditName] = useState(info.name || '');
     const [editDescription, setEditDescription] = useState(info.description || '');
     const [editX, setX] = useState(info.x || 0);
@@ -75,32 +78,41 @@ const CityInfo= () => {
         setY(Number(event.target.value));
     };
 
+    const popForm = () => {
+        setShowForm(!showForm);
+    };
+
     return (
         <div>
             <div>
                 <h1>{info.name}</h1>
                 <p>{info.description}</p>
+                <button onClick={popForm}>Edit</button>
                 <button onClick={deleteInfo}>Delete</button>
             </div>
-            <form onSubmit={editInfo}>
-                <input type='text' value={editName} 
-                    onChange={controlNameChange}
-                    placeholder= {info.name}
-                />
-                <input value={editDescription} 
-                    onChange={controlDescriptionChange}
-                    placeholder= {info.description}
-                />
-                <input value={editX} 
-                    onChange={controlXChange}
-                    placeholder= {info.x.toString()}
-                />
-                <input value={editY} 
-                    onChange={controlYChange}
-                    placeholder= {info.y.toString()}
-                />
-                <button onClick={editInfo}>Save</button>
-            </form>
+
+            {showForm && (
+                <form onSubmit={editInfo}>
+                    <input type='text' value={editName} 
+                        onChange={controlNameChange}
+                        placeholder= {info.name}
+                    />
+                    <input value={editDescription} 
+                        onChange={controlDescriptionChange}
+                        placeholder= {info.description}
+                    />
+                    <input value={editX} 
+                        onChange={controlXChange}
+                        placeholder= {info.x.toString()}
+                    />
+                    <input value={editY} 
+                        onChange={controlYChange}
+                        placeholder= {info.y.toString()}
+                    />
+                    <button onClick={editInfo}>Save</button>
+                </form>
+            )}
+            
         </div>
     );
 };

@@ -23,13 +23,16 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
                         .attr("class", "city-marker")
                         .attr("cx", city => city.x) // Assume city data includes 'x' coordinate
                         .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
-                        .attr("r", 10)
-                        .attr("fill", "red") // Fill color for the circles
+                        .attr("r", 8)
+                        .attr("stroke", "none")
+                        .attr("fill", "rgb(60, 118, 219)") // Fill color for the circles
                         .on("mouseover", function (event,d) {
-                          d3.select(this).attr("opacity", 0.3)
+                          d3.select(this).attr("opacity", 0.6)
+                                          .attr("fill", "black")
                                           .attr("cursor", "pointer");})
                         .on("mouseout", function (event,d) {
-                                            d3.select(this).attr("opacity", 1);})
+                                            d3.select(this).attr("opacity", 1)
+                                                            .attr("fill", "rgb(60, 118, 219)");})
                         .on("click", function (event: MouseEvent) {
                           const element = event.currentTarget as HTMLElement;
                           window.location.href = `/info/${element.id}`;
