@@ -154,9 +154,9 @@ const CityInfo= () => {
                     />
                     </label>
                     <label>Town Type:
-                        <select name="select" id="select" onChange={controlTypeChange} required>
-                            <option value="" disabled>{info.type}</option>
-                            <option value="City">City</option>
+                        <select name="select" id="select" onChange={controlTypeChange}>
+                            <option value={info.type}>{info.type}</option>
+                            <option value="Commercial">Commercial</option>
                             <option value="Military">Military</option>
                             <option value="Industrial">Industrial</option>
                         </select>

@@ -23,7 +23,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
     cities.forEach(city => {
 
       switch(city.type) {
-        case 'City':
+        case 'Commercial':
           svg.append('circle')
               .attr('cx', city.x)
               .attr('cy', city.y)
