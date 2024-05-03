@@ -13,7 +13,7 @@ const CityInfo= () => {
     const params = useParams();
     const cityId = params.cityId;
 
-    const [info, setInfo] = useState({ name: '', description: '', x: 0, y: 0 });
+    const [info, setInfo] = useState({ name: '', description: '', x: 0, y: 0, type: '', size: 0});
 
     const [showForm, setShowForm] = useState(false);
 
@@ -21,6 +21,8 @@ const CityInfo= () => {
     const [editDescription, setEditDescription] = useState(info.description || '');
     const [editX, setX] = useState(info.x || 0);
     const [editY, setY] = useState(info.y || 0);
+    const [editType, setType] = useState(info.type || '');
+    const [editSize, setSize] = useState(info.size || 0);
 
     useEffect(() => {
         fetch(`${BACKEND_BASE_PATH}${cityId}`).then((res) => {
@@ -38,13 +40,20 @@ const CityInfo= () => {
         setEditDescription(info.description);
         setX(info.x);
         setY(info.y);
+        setType(info.type);
+        setSize(info.size);
     }, [info]);
 
     const editInfo = () => {
         fetch(`${BACKEND_BASE_PATH}${cityId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: editName, description: editDescription, x: editX, y: editY}),
+            body: JSON.stringify({ name: editName, 
+                                    description: editDescription, 
+                                    x: editX, 
+                                    y: editY,
+                                    type: editType,
+                                    size: editSize}),
         }).then(res => {
             res.json();
         }).catch(error => {
@@ -78,6 +87,14 @@ const CityInfo= () => {
         setY(Number(event.target.value));
     };
 
+    const controlTypeChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+        setType(event.target.value)
+    };
+
+    const controlSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSize(Number(event.target.value));
+    };
+
     const popForm = () => {
         setShowForm(!showForm);
     };
@@ -91,6 +108,8 @@ const CityInfo= () => {
             <div id="button-group">
                 <h1>{info.name}</h1>
                 <p>{info.description}</p>
+                <p>Town Type: {info.type}</p>
+                <p>Town Size: {info.size}</p>
                 <button onClick={popForm}>Edit</button>
                 <button onClick={deleteInfo}>Delete</button>
                 <button onClick={backToMap}>Back to Map</button>
@@ -125,6 +144,20 @@ const CityInfo= () => {
                         value={editY} 
                         onChange={controlYChange}
                         placeholder= {info.y.toString()}
+                    />
+                    </label>
+                    <label>Town Type:
+                    <select name="select" id="select" onChange={controlTypeChange} required>
+                        <option value="" disabled>{info.type}</option>
+                        <option value="City">City</option>
+                        <option value="Military">Military</option>
+                        <option value="Industrial">Industrial</option>
+                     </select>
+                     </label>
+                     <label>Town Size:
+                    <input value={editSize} 
+                        onChange={controlSizeChange}
+                        placeholder= {info.size.toString()}
                     />
                     </label>
                     <button onClick={editInfo}>Save</button>

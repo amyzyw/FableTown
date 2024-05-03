@@ -21,11 +21,11 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
     const cityPoints = svg.selectAll("circle").data(cities)
                         .attr("id", city => city.cityId)
                         .attr("class", "city-marker")
-                        .attr("cx", city => city.x) // Assume city data includes 'x' coordinate
-                        .attr("cy", city => city.y) // Assume city data includes 'y' coordinate
-                        .attr("r", 8)
+                        .attr("cx", city => city.x)
+                        .attr("cy", city => city.y)
+                        .attr("r", city => city.size)
                         .attr("stroke", "none")
-                        .attr("fill", "rgb(60, 118, 219)") // Fill color for the circles
+                        .attr("fill", "rgb(60, 118, 219)")
                         .on("mouseover", function (event,d) {
                           d3.select(this).attr("opacity", 0.6)
                                           .attr("fill", "black")
