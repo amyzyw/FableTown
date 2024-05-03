@@ -82,6 +82,10 @@ const CityInfo= () => {
         setShowForm(!showForm);
     };
 
+    const backToMap =  () => {
+        window.location.href = `/`
+    };
+
     return (
         <div>
             <div>
@@ -89,6 +93,7 @@ const CityInfo= () => {
                 <p>{info.description}</p>
                 <button onClick={popForm}>Edit</button>
                 <button onClick={deleteInfo}>Delete</button>
+                <button onClick={backToMap}>Back to Map</button>
             </div>
 
             {showForm && (
@@ -112,7 +117,7 @@ const CityInfo= () => {
                     <button onClick={editInfo}>Save</button>
                 </form>
             )}
-            
+
         </div>
     );
 };
