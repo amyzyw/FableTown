@@ -13,6 +13,7 @@ const Insert = () => {
     const [y, setY] = useState<number>(0);
     const [type, setType] = useState('');
     const [size, setSize] = useState<number>(0);
+    const [color, setColor] = useState('');
     const navigate = useNavigate();
 
   // Handle form submission
@@ -28,7 +29,8 @@ const Insert = () => {
                             x: x,
                             y:y,
                             type: type,
-                            size: size  
+                            size: size,
+                            color: color
       }),
     },).then((res) => res.json()).then((data) => {
         console.log("RECEIVED CITIES: ", data);
@@ -57,13 +59,18 @@ const Insert = () => {
     const handleYChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setY(Number(event.target.value));
     };
-  // Handle input changes for x field
+  // Handle input changes for type field
   const handleTypeChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     setType(event.target.value)
 };
-// Handle input changes for y field
+// Handle input changes for size field
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSize(Number(event.target.value));
+  };
+
+  // Handle input changes for color field
+  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setColor(event.target.value);
   };
 
 
@@ -100,8 +107,13 @@ const Insert = () => {
               </label>
               <label>
                 Size:
-                <input type="number" value={x} 
+                <input type="number" value={size} 
                 onChange={handleSizeChange}/>
+              </label>
+              <label>
+                Color:
+                <input type="color" value={color} 
+                onChange={handleColorChange}/>
               </label>
 
               <input type="submit" value="Submit" id='input'/>

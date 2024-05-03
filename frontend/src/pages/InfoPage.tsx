@@ -13,7 +13,7 @@ const CityInfo= () => {
     const params = useParams();
     const cityId = params.cityId;
 
-    const [info, setInfo] = useState({ name: '', description: '', x: 0, y: 0, type: '', size: 0});
+    const [info, setInfo] = useState({ name: '', description: '', x: 0, y: 0, type: '', size: 0, color: ''});
 
     const [showForm, setShowForm] = useState(false);
 
@@ -23,6 +23,7 @@ const CityInfo= () => {
     const [editY, setY] = useState(info.y || 0);
     const [editType, setType] = useState(info.type || '');
     const [editSize, setSize] = useState(info.size || 0);
+    const [editColor, setColor] = useState(info.color || '');
 
     useEffect(() => {
         fetch(`${BACKEND_BASE_PATH}${cityId}`).then((res) => {
@@ -41,7 +42,8 @@ const CityInfo= () => {
         setX(info.x);
         setY(info.y);
         setType(info.type);
-        setSize(info.size);
+        setSize(info.size)
+        setColor(info.color);
     }, [info]);
 
     const editInfo = () => {
@@ -53,7 +55,8 @@ const CityInfo= () => {
                                     x: editX, 
                                     y: editY,
                                     type: editType,
-                                    size: editSize}),
+                                    size: editSize,
+                                    color: editColor}),
         }).then(res => {
             res.json();
         }).catch(error => {
@@ -93,6 +96,10 @@ const CityInfo= () => {
 
     const controlSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSize(Number(event.target.value));
+    };
+
+    const controlColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setColor(event.target.value);
     };
 
     const popForm = () => {
@@ -147,18 +154,21 @@ const CityInfo= () => {
                     />
                     </label>
                     <label>Town Type:
-                    <select name="select" id="select" onChange={controlTypeChange} required>
-                        <option value="" disabled>{info.type}</option>
-                        <option value="City">City</option>
-                        <option value="Military">Military</option>
-                        <option value="Industrial">Industrial</option>
-                     </select>
-                     </label>
-                     <label>Town Size:
+                        <select name="select" id="select" onChange={controlTypeChange} required>
+                            <option value="" disabled>{info.type}</option>
+                            <option value="City">City</option>
+                            <option value="Military">Military</option>
+                            <option value="Industrial">Industrial</option>
+                        </select>
+                    </label>
+                    <label>Town Size:
                     <input value={editSize} 
                         onChange={controlSizeChange}
                         placeholder= {info.size.toString()}
                     />
+                    </label>
+                    <label>Color:
+                        <input type="color" value={editColor} onChange={controlColorChange}/>
                     </label>
                     <button onClick={editInfo}>Save</button>
                 </form>

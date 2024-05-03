@@ -16,6 +16,6 @@ export const deleteCity = async (cityId: string) => {
   return await cityCollectionRef.doc(cityId).delete();
 };
 
-export const updateInfo = async (cityId: string, name: string, description: string, x: number, y: number, size: number, type: string) => {
-  return await cityCollectionRef.doc(cityId).update({ name, description, x, y, size, type});
+export const updateInfo = async (cityId: string, name: string, description: string, x: number, y: number, size: number, type: string, color: string) => {
+  return await cityCollectionRef.doc(cityId).update({ name, description, x, y, size, type, color });
 }

@@ -489,10 +489,25 @@ input[type="textarea"] {
     gap: 10px;
   }
 
-
-
-
-  /* .city-marker {
-    fill: rgb(60, 118, 219);
-  } */
+  input[type="color"] {
+    margin-left: 8px;
+    background: none;
+    cursor: pointer;
+    height: 1.5em;
+    padding: 0;
+    width: 3em;
+    border-radius: 4px;
+  }
   
+  ::-webkit-color-swatch-wrapper {
+    padding: 3px;
+  }
+  
+  ::-webkit-color-swatch{
+    border: 0;
+    border-radius: 4px;
+  }
+
+  select#select {
+    margin-left: 8px;
+  }

@@ -28,7 +28,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
               .attr('cx', city.x)
               .attr('cy', city.y)
               .attr('r', city.size)
-              .attr('fill', 'rgb(60, 118, 219)')
+              .attr('fill', city.color)
               .on('mouseover', function(event) {
                 d3.select(this).attr('opacity', 0.6)
                               .attr('fill', 'black')
@@ -36,7 +36,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
              })
              .on('mouseout', function(event) {
                 d3.select(this).attr('opacity', 1)
-                              .attr('fill', 'rgb(60, 118, 219)');
+                              .attr('fill', city.color);
              })
              .on('click', function(event) {
                 window.location.href = `/info/${city.cityId}`;
@@ -48,7 +48,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
               .attr('y', city.y - city.size / 2)
               .attr('width', city.size)
               .attr('height', city.size)
-              .attr('fill', 'rgb(60, 118, 219)')
+              .attr('fill', city.color)
               .on('mouseover', function(event) {
                 d3.select(this).attr('opacity', 0.6)
                               .attr('fill', 'black')
@@ -56,7 +56,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
              })
              .on('mouseout', function(event) {
                 d3.select(this).attr('opacity', 1)
-                              .attr('fill', 'rgb(60, 118, 219)');
+                              .attr('fill', city.color);
              })
              .on('click', function(event) {
                 window.location.href = `/info/${city.cityId}`;
@@ -68,7 +68,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
               .attr('cy', city.y)
               .attr('rx', city.size)
               .attr('ry', city.size *0.7)
-              .attr('fill', 'rgb(60, 118, 219)')
+              .attr('fill', city.color)
               .on('mouseover', function(event) {
                 d3.select(this).attr('opacity', 0.6)
                               .attr('fill', 'black')
@@ -76,7 +76,7 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
              })
              .on('mouseout', function(event) {
                 d3.select(this).attr('opacity', 1)
-                              .attr('fill', 'rgb(60, 118, 219)');
+                              .attr('fill', city.color);
              })
              .on('click', function(event) {
                 window.location.href = `/info/${city.cityId}`;
