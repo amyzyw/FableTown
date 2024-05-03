@@ -18,25 +18,73 @@ const MapSvg: React.FC<MapSvgProps> = ({ cities, style }) => {
 
   const drawCities = () => {
     const svg = d3.select('svg#fantasyMap');
-    const cityPoints = svg.selectAll("circle").data(cities)
-                        .attr("id", city => city.cityId)
-                        .attr("class", "city-marker")
-                        .attr("cx", city => city.x)
-                        .attr("cy", city => city.y)
-                        .attr("r", city => city.size)
-                        .attr("stroke", "none")
-                        .attr("fill", "rgb(60, 118, 219)")
-                        .on("mouseover", function (event,d) {
-                          d3.select(this).attr("opacity", 0.6)
-                                          .attr("fill", "black")
-                                          .attr("cursor", "pointer");})
-                        .on("mouseout", function (event,d) {
-                                            d3.select(this).attr("opacity", 1)
-                                                            .attr("fill", "rgb(60, 118, 219)");})
-                        .on("click", function (event: MouseEvent) {
-                          const element = event.currentTarget as HTMLElement;
-                          window.location.href = `/info/${element.id}`;
-                        })
+
+    // Handle each city type individually
+    cities.forEach(city => {
+
+      switch(city.type) {
+        case 'City':
+          svg.append('circle')
+              .attr('cx', city.x)
+              .attr('cy', city.y)
+              .attr('r', city.size)
+              .attr('fill', 'rgb(60, 118, 219)')
+              .on('mouseover', function(event) {
+                d3.select(this).attr('opacity', 0.6)
+                              .attr('fill', 'black')
+                              .attr('cursor', 'pointer');
+             })
+             .on('mouseout', function(event) {
+                d3.select(this).attr('opacity', 1)
+                              .attr('fill', 'rgb(60, 118, 219)');
+             })
+             .on('click', function(event) {
+                window.location.href = `/info/${city.cityId}`;
+             });
+          break;
+        case 'Military':
+          svg.append('rect')
+              .attr('x', city.x - city.size / 2)
+              .attr('y', city.y - city.size / 2)
+              .attr('width', city.size)
+              .attr('height', city.size)
+              .attr('fill', 'rgb(60, 118, 219)')
+              .on('mouseover', function(event) {
+                d3.select(this).attr('opacity', 0.6)
+                              .attr('fill', 'black')
+                              .attr('cursor', 'pointer');
+             })
+             .on('mouseout', function(event) {
+                d3.select(this).attr('opacity', 1)
+                              .attr('fill', 'rgb(60, 118, 219)');
+             })
+             .on('click', function(event) {
+                window.location.href = `/info/${city.cityId}`;
+             });
+          break;
+        case 'Industrial':
+          svg.append('ellipse')
+              .attr('cx', city.x)
+              .attr('cy', city.y)
+              .attr('rx', city.size)
+              .attr('ry', city.size *0.7)
+              .attr('fill', 'rgb(60, 118, 219)')
+              .on('mouseover', function(event) {
+                d3.select(this).attr('opacity', 0.6)
+                              .attr('fill', 'black')
+                              .attr('cursor', 'pointer');
+             })
+             .on('mouseout', function(event) {
+                d3.select(this).attr('opacity', 1)
+                              .attr('fill', 'rgb(60, 118, 219)');
+             })
+             .on('click', function(event) {
+                window.location.href = `/info/${city.cityId}`;
+             });
+          break;
+      }
+      
+    });
   };
 
   return(
