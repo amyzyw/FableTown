@@ -101,7 +101,7 @@ const Insert = () => {
               </label>
               <label htmlFor="select">Town Type:
                   <select name="select" id="select" onChange={handleTypeChange} required>
-                    <option value="" disabled>Select</option>
+                    <option value="">Select</option>
                     <option value="Commercial">Commercial</option>
                     <option value="Military">Military</option>
                     <option value="Industrial">Industrial</option>
